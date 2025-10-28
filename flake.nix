@@ -20,6 +20,10 @@
           inherit pkgs;
           modules = [ ./home.nix ];
         };
+        gizmo = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./gizmo.nix ];
+        };
       };
     };
 }
