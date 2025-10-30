@@ -6,35 +6,8 @@
     homeDirectory = "/home/gizmo";
     stateVersion = "25.05"; # Please read the comment before changing.
 
-    packages = with pkgs; [
-      git
-      tig
-      jq
-      httpie
-      htop
-      joe
-      emacs
-      ripgrep
-      babelfish
-      lolcat
-      spotify
-      dive
-      podman
-      fd
+    packages  = import ./common-packages.nix { inherit pkgs; };
 
-      # # It is sometimes useful to fine-tune packages, for example, by applying
-      # # overrides. You can do that directly here, just don't forget the
-      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-      # # fonts?
-      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-      # # You can also create simple shell scripts directly inside your
-      # # configuration. For example, this adds a command 'my-hello' to your
-      # # environment:
-      # (pkgs.writeShellScriptBin "my-hello" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
-    ];
 
    # Home Manager is pretty good at managing dotfiles. The primary way to manage
    # plain files is through 'home.file'.
