@@ -15,7 +15,6 @@ with pkgs; [
       joe
       jq
       jujutsu
-      lazyjj
       lolcat
       podman
       podman-desktop
