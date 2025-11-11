@@ -14,7 +14,8 @@ with pkgs; [
       httpie
       joe
       jq
-      jujutsu
+#      jujutsu
+      lazyjj
       lolcat
       podman
       podman-desktop

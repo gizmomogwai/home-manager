@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # zen-browser.url = "github:0xc000022070/zen-browser-flake";
+#    jj = {
+#      url = "github:martinvonz/jj";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
   };
   outputs = { nixpkgs, home-manager, ... }:
     let
@@ -19,7 +23,7 @@
       homeConfigurations = {
         christian-koestlin = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./christian-koestlin.nix ];
+          modules = [ ./home.nix ];
         };
         gizmo = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
