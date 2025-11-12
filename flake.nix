@@ -1,6 +1,7 @@
 {
   description = "My home-manager flake";
   inputs = {
+    rust-overlay.url = "github:oxalica/rust-overlay";
     nixpkgs = {
       url = "nixpkgs/nixpkgs-unstable";
     };
@@ -8,13 +9,13 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, rust-overlay, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+      overlays = [ (import rust-overlay) ];
+      pkgs = import nixpkgs { inherit overlays system; config.allowUnfree = true; };
     in {
       homeConfigurations = {
         christian-koestlin = home-manager.lib.homeManagerConfiguration {

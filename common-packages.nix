@@ -1,8 +1,6 @@
 { pkgs }:
 with pkgs; [
       babelfish
-      cargo
-      clippy
       dive
       emacs
       enlightenment.ephoto
@@ -21,9 +19,7 @@ with pkgs; [
       podman-desktop
       quodlibet
       ripgrep
-      rust-analyzer
-      rustc
-      rustfmt
+      rust-bin.stable."1.91.1".default
       spotify
       taglib
       tig
