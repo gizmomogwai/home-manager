@@ -34,5 +34,7 @@ with pkgs; [
       wine
       yazi
       zeal
+      rofi
+      rofi-calc
 ]
 
