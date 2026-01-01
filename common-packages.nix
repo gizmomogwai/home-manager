@@ -3,7 +3,6 @@ with pkgs; [
       babelfish
       dive
       emacs
-      enlightenment.ephoto
       evince
       fd
       firefox
