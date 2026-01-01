@@ -4,21 +4,27 @@ with pkgs; [
       dive
       emacs
       enlightenment.ephoto
+      evince
       fd
       firefox
       fish
       git
       htop
       httpie
+      icloudpd
       joe
       jq
       jujutsu
       lazyjj
       lolcat
+#      mpd
       podman
       podman-desktop
+#      qmmp
       quodlibet
+      rclone
       ripgrep
+      rmpc
       rust-bin.stable."1.91.1".default
       spotify
       taglib
@@ -27,5 +33,7 @@ with pkgs; [
       vlc
       vscode
       wine
+      yazi
+      zeal
 ]
 
