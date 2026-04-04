@@ -4,27 +4,31 @@ with pkgs; [
       dive
       emacs
       evince
+      enchant
       fd
       firefox
       fish
+      gdu
       git
+      git-lfs
+      helix
       htop
       httpie
-      icloudpd
+      hunspell
       joe
       jq
       jujutsu
       lazyjj
-      lolcat
-#      mpd
+      ncdu
+      openvpn
+      pandoc
       podman
       podman-desktop
-#      qmmp
       quodlibet
       rclone
       ripgrep
       rmpc
-      rust-bin.stable."1.91.1".default
+      rust-bin.stable."1.94.1".default
       spotify
       taglib
       tig
