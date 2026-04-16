@@ -1,17 +1,13 @@
 { config, pkgs, ... }:
-
 {
   home = {
     username = "christian-koestlin";
     homeDirectory = "/home/christian-koestlin";
     stateVersion = "25.05"; # Please read the comment before changing.
 
-    packages  = import ./common-packages.nix { inherit pkgs; };
-
-
-   # Home Manager is pretty good at managing dotfiles. The primary way to manage
-   # plain files is through 'home.file'.
-   file = {
+    # Home Manager is pretty good at managing dotfiles. The primary way to manage
+    # plain files is through 'home.file'.
+    file = {
       # # Building this configuration will create a copy of 'dotfiles/screenrc' in
       # # the Nix store. Activating the configuration will then make '~/.screenrc' a
       # # symlink to the Nix store copy.
@@ -31,15 +27,6 @@
     # located at either
     #
     #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  /etc/profiles/per-user/christian-koestlin/etc/profile.d/hm-session-vars.sh
-    #
     sessionVariables = {
       EDITOR = "joe";
     };

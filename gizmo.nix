@@ -6,9 +6,6 @@
     homeDirectory = "/home/gizmo";
     stateVersion = "25.05"; # Please read the comment before changing.
 
-    packages  = import ./common-packages.nix { inherit pkgs; };
-
-
    # Home Manager is pretty good at managing dotfiles. The primary way to manage
    # plain files is through 'home.file'.
    file = {

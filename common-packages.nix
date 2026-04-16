@@ -1,44 +1,44 @@
-{ pkgs }:
-with pkgs; [
-      babelfish
-      dive
-      emacs
-      evince
-      enchant
-      fd
-      firefox
-      fish
-      gdu
-      ghostty
-      git
-      git-lfs
-      helix
-      htop
-      httpie
-      hunspell
-      joe
-      jq
-      jujutsu
-      lazyjj
-      ncdu
-      nixgl.auto.nixGLNvidia
-      openvpn
-      pandoc
-      quodlibet
-      rclone
-      ripgrep
-      rmpc
-      spotify
-      taglib
-      tig
-      tree
-vicinae
-      vlc
-      vscode
-      wine
-      yazi
-      zeal
-      rofi
-      rofi-calc
-]
-#      rust-bin.stable."1.93.1".default
+{ config, pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    babelfish
+    dive
+    emacs
+    enchant
+    evince
+    fd
+    firefox
+    fish
+    gdu
+    ghostty
+    git
+    git-lfs
+    helix
+    htop
+    httpie
+    hunspell
+    joe
+    jq
+    jujutsu
+    lazyjj
+    nixgl.auto.nixGLNvidia
+    nixgl.nixGLIntel
+    openvpn
+    pandoc
+    quodlibet
+    rclone
+    ripgrep
+    rmpc
+    rofi
+    rofi-calc
+    spotify
+    taglib
+    tig
+    tree
+    vicinae
+    vlc
+    vscode
+    zeal
+  ];
+}
+  #      rust-bin.stable."1.93.1".default

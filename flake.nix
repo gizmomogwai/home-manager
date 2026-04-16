@@ -1,3 +1,5 @@
+# run with home-manager switch --flake .#$(whoami)
+# to select one of the homemanager configs
 {
   description = "My home-manager flake";
   inputs = {
@@ -9,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-    outputs = { nixpkgs, home-manager, rust-overlay, nixgl, ... }:
+  outputs = { nixpkgs, home-manager, rust-overlay, nixgl, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -19,11 +21,11 @@
       homeConfigurations = {
         christian-koestlin = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./christian-koestlin.nix ];
+          modules = [ ./common-packages.nix ./christian-koestlin.nix ];
         };
         gizmo = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./gizmo.nix ];
+          modules = [ ./common-packages.nix ./gizmo.nix ];
         };
       };
     };
