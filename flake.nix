@@ -2,19 +2,18 @@
   description = "My home-manager flake";
   inputs = {
     rust-overlay.url = "github:oxalica/rust-overlay";
-    nixpkgs = {
-      url = "nixpkgs/nixpkgs-unstable";
-    };
+    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    nixgl.url = "github:nix-community/nixGL";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, home-manager, rust-overlay, ... }:
+    outputs = { nixpkgs, home-manager, rust-overlay, nixgl, ... }:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      overlays = [ (import rust-overlay) ];
+      overlays = [ (import rust-overlay) nixgl.overlay ];
       pkgs = import nixpkgs { inherit overlays system; config.allowUnfree = true; };
     in {
       homeConfigurations = {

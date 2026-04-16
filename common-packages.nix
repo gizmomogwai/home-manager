@@ -9,6 +9,7 @@ with pkgs; [
       firefox
       fish
       gdu
+      ghostty
       git
       git-lfs
       helix
@@ -20,19 +21,18 @@ with pkgs; [
       jujutsu
       lazyjj
       ncdu
+      nixgl.auto.nixGLNvidia
       openvpn
       pandoc
-      podman
-      podman-desktop
       quodlibet
       rclone
       ripgrep
       rmpc
-      rust-bin.stable."1.94.1".default
       spotify
       taglib
       tig
       tree
+vicinae
       vlc
       vscode
       wine
@@ -41,4 +41,4 @@ with pkgs; [
       rofi
       rofi-calc
 ]
-
+#      rust-bin.stable."1.93.1".default
