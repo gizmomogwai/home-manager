@@ -1,0 +1,4 @@
+* update
+nix flake update
+home-manager switch --flake .#$(whoami) --impure
+
