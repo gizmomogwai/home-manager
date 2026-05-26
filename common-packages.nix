@@ -37,7 +37,6 @@
     tree
     vicinae
     vlc
-    vscode
     zeal
   ];
 }
