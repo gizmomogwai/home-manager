@@ -21,7 +21,7 @@
     jq
     jujutsu
     lazyjj
-    nixgl.auto.nixGLNvidia
+#    nixgl.auto.nixGLNvidia
     nixgl.nixGLIntel
     openvpn
     pandoc
