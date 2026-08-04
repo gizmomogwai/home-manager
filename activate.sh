@@ -1,2 +1,3 @@
 #!/usr/bin/sh -xe
-home-manager switch --flake .#$(whoami) --impure
+host_name="$(hostname)"
+env HOSTNAME="$host_name" home-manager switch --flake ".#$(whoami)" --impure

@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     babelfish
+    copilot
     dive
     emacs
     enchant
@@ -22,7 +23,9 @@
     jq
     jujutsu
     lazyjj
+#    nixgl.auto.nixGLNvidia
     lua
+    nixgl.nixGLIntel
     openvpn
     pandoc
     quodlibet

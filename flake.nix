@@ -1,4 +1,4 @@
-# run with home-manager switch --flake .#$(whoami) --impure
+# run with env HOSTNAME="$(hostname)" home-manager switch --flake ".#$(whoami)" --impure
 # to select one of the homemanager configs
 {
   description = "My home-manager flake";
@@ -57,15 +57,17 @@
         };
       overlays = [ (import rust-overlay) nixglOverlay ];
       pkgs = import nixpkgs { inherit overlays system; config.allowUnfree = true; };
+      username = builtins.getEnv "USER";
+      hostName = builtins.getEnv "HOSTNAME";
+      hostModule = ./. + "/${hostName}.nix";
     in {
       homeConfigurations = {
-        christian-koestlin = home-manager.lib.homeManagerConfiguration {
+        "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./common-packages.nix ./christian-koestlin.nix ];
-        };
-        gizmo = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./common-packages.nix ./gizmo.nix ];
+          modules = [
+            ./common-packages.nix
+            (./. + "/${username}.nix")
+          ] ++ lib.optional (builtins.pathExists hostModule) hostModule;
         };
       };
     };
