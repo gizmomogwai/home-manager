@@ -22,14 +22,14 @@
       };
       username = builtins.getEnv "USER";
       hostName = builtins.getEnv "HOSTNAME";
-      hostModule = ./. + "/${hostName}.nix";
+      hostModule = ./. + "/hosts/${hostName}.nix";
     in {
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./common-packages.nix
-            (./. + "/${username}.nix")
+            (./. + "/users/${username}.nix")
           ] ++ lib.optional (builtins.pathExists hostModule) hostModule;
         };
       };
