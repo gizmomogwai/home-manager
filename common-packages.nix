@@ -21,6 +21,7 @@
     joe
     jq
     jujutsu
+    just
     lazyjj
     lua
     openvpn
