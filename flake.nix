@@ -5,7 +5,9 @@
   inputs = {
     rust-overlay.url = "github:oxalica/rust-overlay";
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    nixgl.url = "github:nix-community/nixGL";
+    # nixgl.url = "github:nix-community/nixGL";
+    # https://github.com/nix-community/nixGL/pull/223
+    nixgl.url = "github:TheTeXnician/nixGL/bbcc73c8bcc72b195fead993c7056b12683424f0";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
