@@ -52,4 +52,3 @@
     zeal
   ];
 }
-  #      rust-bin.stable."1.93.1".default
