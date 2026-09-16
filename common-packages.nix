@@ -2,15 +2,24 @@
 {
   home.packages = with pkgs; [
     babelfish
+    claude-code
+    devbox
+    devenv
+    direnv
     dive
+#    emacs-unstable
+    eask-cli # like cask for emacs
     emacs
+#      emacsPackages.cask
     enchant
     evince
     fd
     firefox
     fish
     gdu
+    gh
     ghostty
+    gimp
     git
     git-lfs
     google-chrome
@@ -24,7 +33,9 @@
     just
     lazyjj
     lua
-    openvpn
+    moor
+#    opencode
+#    openvpn
     pandoc
     quodlibet
     rclone
@@ -36,7 +47,7 @@
     taglib
     tig
     tree
-    vicinae
+    typst
     vlc
     zeal
   ];

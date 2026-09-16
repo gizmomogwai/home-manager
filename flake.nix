@@ -4,6 +4,7 @@
   description = "My home-manager flake";
   inputs = {
     rust-overlay.url = "github:oxalica/rust-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
     # nixgl.url = "github:nix-community/nixGL";
     # https://github.com/nix-community/nixGL/pull/223
@@ -13,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, home-manager, rust-overlay, nixgl, ... }:
+  outputs = { nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, ... }:
     let
       lib = nixpkgs.lib;
-      overlays = [ (import rust-overlay) nixgl.overlay ];
+      overlays = [ (import rust-overlay) emacs-overlay.overlays.default nixgl.overlay ];
       pkgs = import nixpkgs {
         inherit overlays;
         localSystem = "x86_64-linux";
