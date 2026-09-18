@@ -14,6 +14,7 @@
     enchant
     fd
     firefox
+    fzf
     gdu
     gh
     git
