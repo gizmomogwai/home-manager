@@ -17,10 +17,9 @@
   outputs = { nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, ... }:
     let
       lib = nixpkgs.lib;
-      overlays = [ (import rust-overlay) emacs-overlay.overlays.default nixgl.overlay ];
       system = builtins.currentSystem;
       isLinux = lib.hasSuffix "-linux" system;
-      overlays = [ (import rust-overlay) ]
+      overlays = [ (import rust-overlay) emacs-overlay.overlays.default ]
         ++ lib.optional isLinux nixgl.overlay;
       pkgs = import nixpkgs {
         inherit system overlays;

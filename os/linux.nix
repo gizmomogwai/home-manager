@@ -12,6 +12,5 @@
     taglib
     vicinae
     vlc
-    zeal
   ];
 }

@@ -37,7 +37,6 @@
     tig
     tree
     typst
-    vlc
     zeal
   ];
 }
