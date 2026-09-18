@@ -4,11 +4,21 @@
     enable = true;
   };
 
+  programs.direnv = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   home.packages = with pkgs; [
     babelfish
+    byobu
     claude-code
     devenv
-    direnv
     eask-cli # like cask for emacs
     emacs
     enchant
@@ -20,7 +30,6 @@
     git
     git-lfs
     google-chrome
-    helix
     htop
     httpie
     hunspell

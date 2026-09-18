@@ -27,6 +27,7 @@
       };
       username = builtins.getEnv "USER";
     in {
+      packages.${system}.home-manager = home-manager.packages.${system}.home-manager;
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
