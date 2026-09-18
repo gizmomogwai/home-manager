@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  programs.fish = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     babelfish
     claude-code
@@ -10,11 +14,8 @@
     enchant
     fd
     firefox
-    fish
     gdu
     gh
-    ghostty
-    gimp
     git
     git-lfs
     google-chrome
