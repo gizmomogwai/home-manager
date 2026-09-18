@@ -18,22 +18,25 @@
     let
       lib = nixpkgs.lib;
       overlays = [ (import rust-overlay) emacs-overlay.overlays.default nixgl.overlay ];
+      system = builtins.currentSystem;
+      isLinux = lib.hasSuffix "-linux" system;
+      overlays = [ (import rust-overlay) ]
+        ++ lib.optional isLinux nixgl.overlay;
       pkgs = import nixpkgs {
-        inherit overlays;
-        localSystem = "x86_64-linux";
+        inherit system overlays;
         config.allowUnfree = true;
       };
       username = builtins.getEnv "USER";
-      hostName = builtins.getEnv "HOSTNAME";
-      hostModule = ./. + "/hosts/${hostName}.nix";
     in {
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./common-packages.nix
-            (./. + "/users/${username}.nix")
-          ] ++ lib.optional (builtins.pathExists hostModule) hostModule;
+            ./os
+            ./users
+            ./hosts
+          ];
         };
       };
     };

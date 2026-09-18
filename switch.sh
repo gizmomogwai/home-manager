@@ -1,3 +1,3 @@
-#!/usr/bin/sh -xe
+#!/usr/bin/env sh -xe
 host_name="$(hostname)"
-env HOSTNAME="$host_name" home-manager switch --flake ".#$(whoami)" --impure --show-trace
+/usr/bin/env HOSTNAME="$host_name" nix run home-manager -- switch --flake ".#$(whoami)" --impure --show-trace

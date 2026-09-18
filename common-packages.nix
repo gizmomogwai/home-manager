@@ -3,16 +3,11 @@
   home.packages = with pkgs; [
     babelfish
     claude-code
-    devbox
     devenv
     direnv
-    dive
-#    emacs-unstable
     eask-cli # like cask for emacs
     emacs
-#      emacsPackages.cask
     enchant
-    evince
     fd
     firefox
     fish
@@ -34,17 +29,9 @@
     lazyjj
     lua
     moor
-#    opencode
-#    openvpn
     pandoc
-    quodlibet
     rclone
     ripgrep
-    rmpc
-    rofi
-    rofi-calc
-    spotify
-    taglib
     tig
     tree
     typst
