@@ -1,3 +1,3 @@
 #!/usr/bin/env sh -xe
 nix flake update
-nix-collect-garbage --delete-older-than 2d
+nix-collect-garbage --delete-older-than 14d
