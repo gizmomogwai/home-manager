@@ -1,0 +1,1 @@
+(locate-dominating-file default-directory "\.jj")

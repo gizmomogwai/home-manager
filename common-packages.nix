@@ -2,15 +2,13 @@
 {
   programs.fish = {
     enable = true;
-    # The Nix installer only patches bash/zsh, not fish, so a fish login shell
-    # misses ~/.nix-profile/bin and /nix/var/nix/profiles/default/bin. Source
-    # nix-daemon.sh (translated to fish) to replicate the bash/zsh setup.
-    loginShellInit = ''
-      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-        ${pkgs.babelfish}/bin/babelfish < /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh | source
-      end
-    '';
+    shellAliases = {
+      less = "moor";
+    };
     interactiveShellInit = ''
+      if test -e ~/.nix-profile/etc/profile.d/nix-daemon.fish
+        source ~/.nix-profile/etc/profile.d/nix-daemon.fish
+      end
       set -x SPOTIFY_CLIENT_ID (${pkgs.age}/bin/age --decrypt --identity=$HOME/.config/age/christian.koestlin@gmail.com $HOME/.config/api-keys/spotify-client-id.encrypted)
       set -x SPOTIFY_CLIENT_SECRET (${pkgs.age}/bin/age --decrypt --identity=$HOME/.config/age/christian.koestlin@gmail.com $HOME/.config/api-keys/spotify-client-secret.encrypted)
       set -x TONIES_EMAIL (${pkgs.age}/bin/age --decrypt --identity=$HOME/.config/age/christian.koestlin@gmail.com $HOME/.config/api-keys/tonies-email.encrypted)
@@ -32,6 +30,9 @@
   };
 
   home.packages = with pkgs; [
+    (writeShellScriptBin "magit" ''
+      ${emacs}/bin/emacs -nw --eval "(progn (if (locate-dominating-file default-directory \".jj\") (jj-log) (magit-status)) (delete-other-windows))"
+    '')
     age
     babelfish
     byobu
