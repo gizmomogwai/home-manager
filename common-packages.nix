@@ -56,6 +56,7 @@
     jq
     jujutsu
     just
+    jj-starship
     lazyjj
     lua
     moor
@@ -64,7 +65,6 @@
     ripgrep
     tig
     tree
-    typst
     zeal
   ];
 }
