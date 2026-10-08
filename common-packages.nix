@@ -43,6 +43,7 @@
     enchant
     fd
     firefox
+    ffmpeg
     fzf
     gdu
     gh
@@ -61,8 +62,11 @@
     lua
     moor
     pandoc
+    proton-cli
+    proton-pass
     rclone
     ripgrep
+    rsync
     tig
     tree
     zeal
