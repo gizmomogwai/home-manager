@@ -6,7 +6,9 @@
       less = "moor";
     };
     interactiveShellInit = ''
-      if test -e ~/.nix-profile/etc/profile.d/nix-daemon.fish
+      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
+      else if test -e ~/.nix-profile/etc/profile.d/nix-daemon.fish
         source ~/.nix-profile/etc/profile.d/nix-daemon.fish
       end
       set -x SPOTIFY_CLIENT_ID (${pkgs.age}/bin/age --decrypt --identity=$HOME/.config/age/christian.koestlin@gmail.com $HOME/.config/api-keys/spotify-client-id.encrypted)
