@@ -19,8 +19,20 @@
       lib = nixpkgs.lib;
       system = builtins.currentSystem;
       isLinux = lib.hasSuffix "-linux" system;
+      nvidiaVersion = "595.91.07";
+      nixglOverlay = final: prev: {
+        nixgl = import (prev.applyPatches {
+          name = "nixGL-patched";
+          src = nixgl;
+          # upstream sets GBM_BACKENDS_PATH only for mesa; webkitgtk then loads mesa's dri_gbm.so
+          patches = [ ./nixgl-nvidia-gbm.patch ];
+        }) {
+          pkgs = final;
+          inherit nvidiaVersion;
+        };
+      };
       overlays = [ (import rust-overlay) emacs-overlay.overlays.default ]
-        ++ lib.optional isLinux nixgl.overlay;
+        ++ lib.optional isLinux nixglOverlay;
       pkgs = import nixpkgs {
         inherit system overlays;
         config.allowUnfree = true;
