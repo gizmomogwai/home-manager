@@ -33,6 +33,7 @@
     enableFishIntegration = true;
   };
 
+  home.sessionPath = ["$HOME/bin"];
   home.packages = with pkgs; [
     (writeShellScriptBin "magit" ''
       ${emacs}/bin/emacs -nw --eval "(progn (if (locate-dominating-file default-directory \".jj\") (jj-log) (magit-status)) (delete-other-windows))"
@@ -85,6 +86,5 @@
     dub
     ldc
   ];
-
   fonts.fontconfig.enable = true;
 }
