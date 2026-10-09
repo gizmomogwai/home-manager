@@ -53,6 +53,7 @@
     gh
     git
     git-lfs
+    git-repo
     google-chrome
     htop
     httpie
@@ -71,8 +72,19 @@
     rclone
     ripgrep
     rsync
+    slack
     tig
     tree
     zeal
+
+    # fonts
+    iosevka-bin
+    nerd-fonts.iosevka-term
+
+    # dlang
+    dub
+    ldc
   ];
+
+  fonts.fontconfig.enable = true;
 }
