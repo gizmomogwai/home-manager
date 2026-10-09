@@ -26,7 +26,7 @@
       lib = nixpkgs.lib;
       system = builtins.currentSystem;
       isLinux = lib.hasSuffix "-linux" system;
-      nvidiaVersion = "595.91.07";
+      nvidiaVersion = "595.99.02";
       nixglOverlay = final: prev: {
         nixgl = import (prev.applyPatches {
           name = "nixGL-patched";
