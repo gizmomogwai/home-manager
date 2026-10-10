@@ -13,8 +13,15 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills = {
+      url = "github:Kyure-A/agent-skills-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ponytail = { url = "github:DietrichGebert/ponytail"; flake = false; };
+    caveman = { url = "github:JuliusBrussee/caveman"; flake = false; };
+    socratic-code-mentor = { url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"; flake = false; };
   };
-  outputs = { nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, agent-skills, ... }:
     let
       lib = nixpkgs.lib;
       system = builtins.currentSystem;
@@ -43,7 +50,10 @@
       homeConfigurations = {
         "${username}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
           modules = [
+            agent-skills.homeManagerModules.default
+            ./agent-skills.nix
             ./common-packages.nix
             ./os
             ./users

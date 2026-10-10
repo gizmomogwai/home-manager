@@ -1,5 +1,41 @@
 {
   "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790154098,
+        "narHash": "sha256-SviEpvFefXCPOmQ2b41c4ujE7BzWYJ/h8p/HZNxD2B8=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "dc122af897ab9a685c20ae54c639021619dbbb52",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
+    "caveman": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791438150,
+        "narHash": "sha256-przOot/S0VLw2aP3tOdxF27mZHMp0NQhyTls0eDAjjs=",
+        "owner": "JuliusBrussee",
+        "repo": "caveman",
+        "rev": "2e08b9177c07bb7249a8a2d1a6758e5db281d002",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JuliusBrussee",
+        "repo": "caveman",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -155,13 +191,33 @@
         "type": "github"
       }
     },
+    "ponytail": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791605992,
+        "narHash": "sha256-S2gHV4/c8XPDqpf0jS8Q5r22//6skZjITf2T9CVhVRE=",
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "rev": "9b58c1ffb790c075ca32e70a89cf1d80588f4abf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
+        "caveman": "caveman",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_3",
-        "rust-overlay": "rust-overlay"
+        "ponytail": "ponytail",
+        "rust-overlay": "rust-overlay",
+        "socratic-code-mentor": "socratic-code-mentor"
       }
     },
     "rust-overlay": {
@@ -180,6 +236,22 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+      }
+    },
+    "socratic-code-mentor": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791140094,
+        "narHash": "sha256-heQjkmXKS9u6sPjeOg45mu0PcyIAUoQcv2SA0r9w7K8=",
+        "ref": "refs/heads/main",
+        "rev": "81743540d400952b76c3937585a2e3c3cff99dd1",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"
       }
     },
     "systems": {

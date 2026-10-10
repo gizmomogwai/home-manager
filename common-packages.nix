@@ -75,6 +75,7 @@
     ripgrep
     rsync
     slack
+    tealdeer
     tig
     tree
     zeal
