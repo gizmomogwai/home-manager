@@ -43,6 +43,7 @@
     byobu
     claude-code
     devenv
+    # dropbox
     eask-cli # like cask for emacs
     emacs
     enchant
