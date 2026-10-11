@@ -59,6 +59,22 @@
         "type": "github"
       }
     },
+    "fisher-package": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789154237,
+        "narHash": "sha256-K/9aLeENYfYSU2DKPY6zKK843bDV7+0QV7geBQ7+5O8=",
+        "owner": "gizmomogwai",
+        "repo": "fisher-package",
+        "rev": "e9ba5a044aa5a54469709b19e1b5d57ba7df1681",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "fisher-package",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -155,6 +171,7 @@
         "agent-skills": "agent-skills",
         "caveman": "caveman",
         "emacs-overlay": "emacs-overlay",
+        "fisher-package": "fisher-package",
         "home-manager": "home-manager",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",

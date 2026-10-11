@@ -2,6 +2,12 @@
 {
   programs.fish = {
     enable = true;
+    plugins = [
+      {
+        name = "fisher-package";
+        src = inputs.fisher-package;
+      }
+    ];
     shellAliases = {
       less = "moor";
     };
