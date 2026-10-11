@@ -74,6 +74,7 @@
     rclone
     ripgrep
     rsync
+    rtk
     slack
     tealdeer
     tig
