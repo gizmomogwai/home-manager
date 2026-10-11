@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   programs.fish = {
     enable = true;
@@ -75,6 +75,7 @@
     ripgrep
     rsync
     rtk
+    inputs.sesame.packages.${pkgs.stdenv.hostPlatform.system}.default
     slack
     tealdeer
     tig

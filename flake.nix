@@ -3,22 +3,37 @@
 {
   description = "My home-manager flake";
   inputs = {
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
-    # nixgl.url = "github:nix-community/nixGL";
-    # https://github.com/nix-community/nixGL/pull/223
-    nixgl.url = "github:TheTeXnician/nixGL/bbcc73c8bcc72b195fead993c7056b12683424f0";
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     agent-skills = {
       url = "github:Kyure-A/agent-skills-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ponytail = { url = "github:DietrichGebert/ponytail"; flake = false; };
     caveman = { url = "github:JuliusBrussee/caveman"; flake = false; };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # nixgl.url = "github:nix-community/nixGL";
+    # https://github.com/nix-community/nixGL/pull/223
+    nixgl = {
+      url = "github:TheTeXnician/nixGL/bbcc73c8bcc72b195fead993c7056b12683424f0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ponytail = { url = "github:DietrichGebert/ponytail"; flake = false; };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sesame = {
+      url = "github:gizmomogwai/sesame";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     socratic-code-mentor = { url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"; flake = false; };
   };
   outputs = inputs@{ nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, agent-skills, ... }:
