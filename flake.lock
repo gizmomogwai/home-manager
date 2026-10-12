@@ -36,6 +36,26 @@
         "type": "github"
       }
     },
+    "dime": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791826885,
+        "narHash": "sha256-e9ojBz5llONvXx6c7BhVMeRh1hKabtq1WdPWAKbbcEA=",
+        "owner": "gizmomogwai",
+        "repo": "dime",
+        "rev": "96d8835e14a410071e8e399db0188c700bbf0805",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "dime",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "nixpkgs": [
@@ -170,6 +190,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "caveman": "caveman",
+        "dime": "dime",
         "emacs-overlay": "emacs-overlay",
         "fisher-package": "fisher-package",
         "home-manager": "home-manager",

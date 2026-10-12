@@ -49,6 +49,7 @@
     byobu
     claude-code
     devenv
+    inputs.dime.packages.${pkgs.stdenv.hostPlatform.system}.default
     # dropbox
     eask-cli # like cask for emacs
     emacs
