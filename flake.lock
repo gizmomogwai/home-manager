@@ -199,7 +199,8 @@
         "ponytail": "ponytail",
         "rust-overlay": "rust-overlay",
         "sesame": "sesame",
-        "socratic-code-mentor": "socratic-code-mentor"
+        "socratic-code-mentor": "socratic-code-mentor",
+        "worker": "worker"
       }
     },
     "rust-overlay": {
@@ -270,6 +271,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "worker": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791833852,
+        "narHash": "sha256-sWQEA5dzmrGukuS0yqGJyUaS5X6MD8knA8KAjzJ2zio=",
+        "owner": "gizmomogwai",
+        "repo": "repo-worker",
+        "rev": "83aa703c882f0095c4a9c33837ec5f75ebbfe0d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "repo-worker",
         "type": "github"
       }
     }

@@ -87,6 +87,7 @@
     tealdeer
     tig
     tree
+    inputs.worker.packages.${pkgs.stdenv.hostPlatform.system}.default
     zeal
 
     # fonts

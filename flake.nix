@@ -43,6 +43,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     socratic-code-mentor = { url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"; flake = false; };
+    worker = {
+      url = "github:gizmomogwai/repo-worker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs = inputs@{ nixpkgs, home-manager, rust-overlay, emacs-overlay, nixgl, agent-skills, ... }:
     let
