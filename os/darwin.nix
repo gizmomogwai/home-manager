@@ -6,4 +6,8 @@
     kanata
     raycast
   ];
+  home.sessionVariables = {
+    CK_OS = "osx";
+  };
+
 }

@@ -44,6 +44,14 @@
     (writeShellScriptBin "magit" ''
       ${emacs}/bin/emacs -nw --eval "(progn (if (locate-dominating-file default-directory \".jj\") (jj-log) (magit-status)) (delete-other-windows))"
     '')
+    (writeShellScriptBin "start-bookmark" ''
+      # rofi is linux-only and choose-gui darwin-only in nixpkgs, so only the host's picker is interpolated
+      line=$(extract-bookmarks-d | ${if stdenv.hostPlatform.isDarwin then lib.getExe choose-gui else "${lib.getExe rofi} -dmenu"}) || exit 0
+      # url is the last field (strip longest prefix ending in '|'); bookmarks without folder have only "title|url"
+      url=''${line##*|}
+      echo "$url"
+      ${if stdenv.hostPlatform.isDarwin then "open" else "xdg-open"} "$url"
+    '')
     age
     babelfish
     byobu
@@ -98,5 +106,11 @@
     dub
     ldc
   ];
+
+  home.sessionVariables = {
+    EDITOR = "joe";
+    CARGO_TARGET_DIR = "/tmp/cargo-target";
+  };
+
   fonts.fontconfig.enable = true;
 }

@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     dive
     evince
-    ghostty
     gimp
     rmpc
     rofi
@@ -13,4 +12,9 @@
     vicinae
     vlc
   ];
+  home.sessionVariables = {
+    CK_OS = "linux";
+  };
+  # non-NixOS: puts ~/.nix-profile/share into XDG_DATA_DIRS so rofi drun sees home-manager .desktop files
+  targets.genericLinux.enable = true;
 }

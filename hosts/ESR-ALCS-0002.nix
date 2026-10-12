@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  # wraps binary plus .desktop and D-Bus service, so launchers also get nvidia GL
+  targets.genericLinux.nixGL.packages = pkgs.nixgl;
+  targets.genericLinux.nixGL.defaultWrapper = "nvidia";
   home.packages = [
+    (config.lib.nixGL.wrap pkgs.ghostty)
     pkgs.nixgl.nixGLNvidia
     pkgs.nixgl.nixVulkanNvidia
     pkgs.nixgl.auto.nixGLDefault
