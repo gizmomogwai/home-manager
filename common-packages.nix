@@ -62,6 +62,7 @@
     eask-cli # like cask for emacs
     emacs
     enchant
+    inputs.extract-bookmarks-d.packages.${pkgs.stdenv.hostPlatform.system}.default
     fd
     firefox
     ffmpeg

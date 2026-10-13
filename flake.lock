@@ -79,6 +79,26 @@
         "type": "github"
       }
     },
+    "extract-bookmarks-d": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791925765,
+        "narHash": "sha256-K9adWvNTBCecMG2REm21maj1UQTSaRRXvUec5rbgmJk=",
+        "ref": "refs/heads/main",
+        "rev": "7972911412ab79828a2c3068235bf25cbb426e2e",
+        "revCount": 67,
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/bookmarks"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/bookmarks"
+      }
+    },
     "fisher-package": {
       "flake": false,
       "locked": {
@@ -192,6 +212,7 @@
         "caveman": "caveman",
         "dime": "dime",
         "emacs-overlay": "emacs-overlay",
+        "extract-bookmarks-d": "extract-bookmarks-d",
         "fisher-package": "fisher-package",
         "home-manager": "home-manager",
         "nixgl": "nixgl",
