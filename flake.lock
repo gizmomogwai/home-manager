@@ -133,6 +133,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -221,6 +239,7 @@
         "rust-overlay": "rust-overlay",
         "sesame": "sesame",
         "socratic-code-mentor": "socratic-code-mentor",
+        "spotify-dl": "spotify-dl",
         "worker": "worker"
       }
     },
@@ -236,6 +255,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "e60029353d0c48d216bc4b065168ccd4079c166f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "spotify-dl",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790584267,
+        "narHash": "sha256-NvjQLSztzad7ulLbvrYFKpz4pRrxZ34zKM7mTGEK1wk=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "3f4df219c0d9aa82710232324856755d51ef0b69",
         "type": "github"
       },
       "original": {
@@ -280,7 +320,44 @@
         "url": "https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"
       }
     },
+    "spotify-dl": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1790598247,
+        "narHash": "sha256-7Tutvmah80piBcUDUNp6pbhi7AsCV/F/5v2ZAs0NOrk=",
+        "ref": "refs/heads/main",
+        "rev": "487fa9ca385a8e08485369b67603f21eb1db6033",
+        "revCount": 29,
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/spotify-dl"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/spotify-dl"
+      }
+    },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

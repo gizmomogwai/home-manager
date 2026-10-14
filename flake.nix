@@ -15,8 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     extract-bookmarks-d = {
-      type = "git";
-      url = "ssh://git@github.com/gizmomogwai/bookmarks";
+      url = "git+ssh://git@github.com/gizmomogwai/bookmarks";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay = {
@@ -48,6 +47,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     socratic-code-mentor = { url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"; flake = false; };
+    spotify-dl = {
+      url = "git+ssh://git@github.com/gizmomogwai/spotify-dl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     worker = {
       url = "github:gizmomogwai/repo-worker";
       inputs.nixpkgs.follows = "nixpkgs";

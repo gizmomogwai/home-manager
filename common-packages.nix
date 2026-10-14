@@ -95,6 +95,7 @@
     rtk
     inputs.sesame.packages.${pkgs.stdenv.hostPlatform.system}.default
     slack
+    inputs.spotify-dl.packages.${pkgs.stdenv.hostPlatform.system}.default
     tealdeer
     tig
     tree
