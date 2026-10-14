@@ -115,6 +115,26 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790898470,
+        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -151,6 +171,29 @@
         "type": "github"
       }
     },
+    "herdr": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791998301,
+        "narHash": "sha256-qi4htt98YMOPi/UEkr8tjOHJlsyY23NCSK6qTncQtaE=",
+        "owner": "herdrdev",
+        "repo": "herdr",
+        "rev": "916fcf8de029c6cac965b50f3cdb9687cd7d1537",
+        "type": "github"
+      },
+      "original": {
+        "owner": "herdrdev",
+        "repo": "herdr",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -169,6 +212,21 @@
         "owner": "nix-community",
         "ref": "master",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1788467110,
+        "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -232,7 +290,10 @@
         "emacs-overlay": "emacs-overlay",
         "extract-bookmarks-d": "extract-bookmarks-d",
         "fisher-package": "fisher-package",
+        "flake-parts": "flake-parts",
+        "herdr": "herdr",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
         "ponytail": "ponytail",
@@ -329,11 +390,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790598247,
-        "narHash": "sha256-7Tutvmah80piBcUDUNp6pbhi7AsCV/F/5v2ZAs0NOrk=",
+        "lastModified": 1792037897,
+        "narHash": "sha256-8BbyDl6lfjeJDm0fpxvez+nQwiLSyxAJGTQeMUvE+BE=",
         "ref": "refs/heads/main",
-        "rev": "487fa9ca385a8e08485369b67603f21eb1db6033",
-        "revCount": 29,
+        "rev": "8e561f139d0ac36a4809394eebf8e8f41c51ada4",
+        "revCount": 30,
         "type": "git",
         "url": "ssh://git@github.com/gizmomogwai/spotify-dl"
       },
