@@ -46,7 +46,9 @@
     '')
     (writeShellScriptBin "start-bookmark" ''
       # rofi is linux-only and choose-gui darwin-only in nixpkgs, so only the host's picker is interpolated
-      line=$(extract-bookmarks-d | ${if stdenv.hostPlatform.isDarwin then lib.getExe choose-gui else "${lib.getExe rofi} -dmenu"}) || exit 0
+      # optional args override the picker, e.g. `start-bookmark fzf --exact`
+      [ $# -eq 0 ] && set -- ${if stdenv.hostPlatform.isDarwin then lib.getExe choose-gui else "${lib.getExe rofi} -dmenu"}
+      line=$(extract-bookmarks-d | "$@") || exit 0
       # url is the last field (strip longest prefix ending in '|'); bookmarks without folder have only "title|url"
       url=''${line##*|}
       echo "$url"
