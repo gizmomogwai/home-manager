@@ -33,6 +33,7 @@
       rsync
       rtk
       slack
+      spotify
       inputs.spotify-dl.packages.${stdenv.hostPlatform.system}.default
       tealdeer
       tig

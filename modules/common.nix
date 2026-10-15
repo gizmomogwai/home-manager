@@ -8,6 +8,7 @@
     bookmarks
     claude
     cli-tools
+    copilot
     dlang
     editor
     fish

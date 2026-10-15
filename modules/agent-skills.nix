@@ -31,6 +31,12 @@
         dest = ".claude/skills";
       };
 
+      targets.copilot = {
+        enable = true;
+        structure = "link";
+        dest = ".copilot/skills";
+      };
+
       # Configuration placeholders:
       #
       # new skill source: add a flake input (flake = false is fine), then

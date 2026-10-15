@@ -7,7 +7,6 @@
       rmpc
       rofi
       rofi-calc
-      spotify
       taglib
       vicinae
       vlc
