@@ -56,6 +56,26 @@
         "type": "github"
       }
     },
+    "donies": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792139656,
+        "narHash": "sha256-UdpASL1RRcve/7CJiUmDAYeFqYtu4Yt/+HGazM4WylM=",
+        "owner": "gizmomogwai",
+        "repo": "donies",
+        "rev": "75d1fa05429b6074edfee1db814b04b4d6b1e24f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "donies",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "nixpkgs": [
@@ -287,6 +307,7 @@
         "agent-skills": "agent-skills",
         "caveman": "caveman",
         "dime": "dime",
+        "donies": "donies",
         "emacs-overlay": "emacs-overlay",
         "extract-bookmarks-d": "extract-bookmarks-d",
         "fisher-package": "fisher-package",

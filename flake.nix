@@ -13,6 +13,10 @@
       url = "github:gizmomogwai/dime";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    donies = {
+      url = "github:gizmomogwai/donies";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";

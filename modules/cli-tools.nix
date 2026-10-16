@@ -5,6 +5,7 @@
       babelfish
       byobu
       devenv
+      inputs.donies.packages.${stdenv.hostPlatform.system}.default
       # dropbox
       fd
       firefox
@@ -25,6 +26,7 @@
       lazyjj
       lua
       moor
+      nix-tree
       pandoc
       proton-cli
       proton-pass
