@@ -1,0 +1,91 @@
+--- a/src/detect/mod.rs
++++ b/src/detect/mod.rs
+@@ -402,7 +402,7 @@
+             {
+                 if matches!(
+                     identify_agent(&wrapped_agent),
+-                    Some(Agent::Qwen | Agent::Cline | Agent::Letta)
++                    Some(Agent::Qwen | Agent::Cline | Agent::Letta | Agent::GithubCopilot)
+                 ) {
+                     return wrapped_agent;
+                 }
+@@ -696,6 +696,9 @@
+                 .zip(suffix)
+                 .all(|(actual, expected)| actual.eq_ignore_ascii_case(expected))
+     };
++    if ends_with(&["lib", "github-copilot-cli", "index.js"]) {
++        return Some(agent_label(Agent::GithubCopilot).to_string());
++    }
+     if ends_with(&[
+         "node_modules",
+         "@earendil-works",
+@@ -1170,6 +1173,69 @@
+     }
+
+     #[test]
++    fn identify_agent_in_job_detects_nix_copilot() {
++        for process_name in ["node", "MainThread"] {
++            let job = crate::platform::ForegroundJob {
++                process_group_id: 123,
++                processes: vec![foreground_process(
++                    123,
++                    process_name,
++                    &[
++                        "/nix/store/example-nodejs/bin/node",
++                        "/nix/store/example-github-copilot-cli/lib/github-copilot-cli/index.js",
++                        "--no-auto-update",
++                    ],
++                )],
++            };
++
++            assert_eq!(
++                identify_agent_in_job(&job),
++                Some((Agent::GithubCopilot, "copilot".to_string())),
++                "process name: {process_name}"
++            );
++        }
++    }
++
++    #[test]
++    fn identify_agent_in_job_rejects_unrelated_copilot_scripts() {
++        for arguments in [
++            vec!["node", "/project/index.js"],
++            vec!["node", "/project/github-copilot-cli/index.js"],
++            vec![
++                "node",
++                "/nix/store/example/lib/github-copilot-cli/helper.js",
++            ],
++            vec![
++                "node",
++                "/nix/store/example/lib/github-copilot-cli/index.js/other.js",
++            ],
++            vec![
++                "node",
++                "--eval",
++                "/nix/store/example/lib/github-copilot-cli/index.js",
++            ],
++            vec![
++                "node",
++                "/project/index.js",
++                "/nix/store/example/lib/github-copilot-cli/index.js",
++            ],
++        ] {
++            for process_name in ["node", "MainThread"] {
++                let job = crate::platform::ForegroundJob {
++                    process_group_id: 123,
++                    processes: vec![foreground_process(123, process_name, &arguments)],
++                };
++
++                assert_eq!(
++                    identify_agent_in_job(&job),
++                    None,
++                    "process name: {process_name}, arguments: {arguments:?}"
++                );
++            }
++        }
++    }
++
++    #[test]
+     fn identify_agent_in_job_detects_node_wrapped_qwen() {
+         for argv in [
+             vec!["node", "/home/user/.fnm/bin/qwen"],

@@ -1,3 +1,21 @@
 * update
 nix flake update
 home-manager switch --flake .  # picks homeConfigurations."$USER@$(hostname)" from modules/machines
+
+* herdr Copilot detection patch
+=patches/herdr-copilot-detection.patch= fixes detection of Nix-packaged Copilot
+running as =node= or =MainThread=. Applied by =modules/herdr.nix=; includes
+regression tests in upstream's =src/detect/mod.rs=.
+
+Based on herdr =916fcf8de029c6cac965b50f3cdb9687cd7d1537=. In an upstream checkout:
+#+begin_src sh
+git apply /path/to/home-manager/patches/herdr-copilot-detection.patch
+cargo test --locked --bin herdr detect::tests::identify_
+#+end_src
+
+Remove the local patch once the pinned upstream version includes the fix.
+Building or switching Home Manager does not replace an already-running herdr
+server; plan its restart separately, without interrupting active sessions.
+
+Upstream currently accepts implementation PRs only from approved contributors.
+Check its contribution policy before submitting; a local patch is not PR approval.

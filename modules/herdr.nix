@@ -13,9 +13,11 @@
       # from the herdr flake input (not pkgs.herdr), so it can be bumped on its own:
       #   nix flake update herdr
       home.packages = [
-        (pkgs.callPackage "${inputs.herdr}/nix/package.nix" {
+        ((pkgs.callPackage "${inputs.herdr}/nix/package.nix" {
           rustPlatform = pkgs.makeRustPlatform { cargo = toolchain; rustc = toolchain; };
-        })
+        }).overrideAttrs (previous: {
+          patches = (previous.patches or [ ]) ++ [ ../patches/herdr-copilot-detection.patch ];
+        }))
       ];
 
       # Configuration placeholders (check `herdr --help` / https://herdr.dev for the real keys):
