@@ -8,7 +8,10 @@
       url = "github:Kyure-A/agent-skills-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    caveman = { url = "github:JuliusBrussee/caveman"; flake = false; };
+    caveman = {
+      url = "github:JuliusBrussee/caveman";
+      flake = false;
+    };
     dime = {
       url = "github:gizmomogwai/dime";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +54,10 @@
       url = "github:TheTeXnician/nixGL/bbcc73c8bcc72b195fead993c7056b12683424f0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ponytail = { url = "github:DietrichGebert/ponytail"; flake = false; };
+    ponytail = {
+      url = "github:DietrichGebert/ponytail";
+      flake = false;
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,7 +66,10 @@
       url = "github:gizmomogwai/sesame";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    socratic-code-mentor = { url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git"; flake = false; };
+    socratic-code-mentor = {
+      url = "git+https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25.git";
+      flake = false;
+    };
     spotify-dl = {
       url = "git+ssh://git@github.com/gizmomogwai/spotify-dl";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,7 +78,6 @@
       url = "github:gizmomogwai/repo-worker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }

@@ -1,21 +1,31 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   flake.modules.homeManager.agent-skills = {
-    imports = [ inputs.agent-skills.homeManagerModules.default ];
+    imports = [inputs.agent-skills.homeManagerModules.default];
 
     programs.agent-skills = {
       enable = true;
 
       # `path` instead of `input = "<name>"`, so no extraSpecialArgs.inputs is needed
       sources = {
-        ponytail = { path = inputs.ponytail; subdir = "skills"; filter.maxDepth = 1; };
-        caveman = { path = inputs.caveman; subdir = "skills"; filter.maxDepth = 1; };
+        ponytail = {
+          path = inputs.ponytail;
+          subdir = "skills";
+          filter.maxDepth = 1;
+        };
+        caveman = {
+          path = inputs.caveman;
+          subdir = "skills";
+          filter.maxDepth = 1;
+        };
         # gist: SKILL.md at repo root
-        socratic-code-mentor = { path = inputs.socratic-code-mentor; };
+        socratic-code-mentor = {path = inputs.socratic-code-mentor;};
       };
 
-      skills.enableAll = [ "ponytail" "caveman" ];
-      skills.explicit.socratic-code-mentor = { from = "socratic-code-mentor"; path = "."; };
+      skills.enableAll = ["ponytail" "caveman"];
+      skills.explicit.socratic-code-mentor = {
+        from = "socratic-code-mentor";
+        path = ".";
+      };
 
       targets.agents = {
         enable = true;

@@ -1,5 +1,9 @@
-{ config, inputs, lib, ... }:
 {
+  config,
+  inputs,
+  lib,
+  ...
+}: {
   options.nvidiaVersion = lib.mkOption {
     type = lib.types.str;
     default = "595.99.02";
@@ -16,19 +20,20 @@
     # lazy attr: only evaluated (and only buildable) on linux hosts that use it
     overlays = [
       (final: prev: {
-        nixgl = import (prev.applyPatches {
-          name = "nixGL-patched";
-          src = inputs.nixgl;
-          # upstream sets GBM_BACKENDS_PATH only for mesa; webkitgtk then loads mesa's dri_gbm.so
-          patches = [ ../nixgl-nvidia-gbm.patch ];
-        }) {
-          pkgs = final;
-          inherit (config) nvidiaVersion nvidiaHash;
-        };
+        nixgl =
+          import (prev.applyPatches {
+            name = "nixGL-patched";
+            src = inputs.nixgl;
+            # upstream sets GBM_BACKENDS_PATH only for mesa; webkitgtk then loads mesa's dri_gbm.so
+            patches = [../nixgl-nvidia-gbm.patch];
+          }) {
+            pkgs = final;
+            inherit (config) nvidiaVersion nvidiaHash;
+          };
       })
     ];
 
-    flake.modules.homeManager.nixgl-nvidia = { pkgs, ... }: {
+    flake.modules.homeManager.nixgl-nvidia = {pkgs, ...}: {
       targets.genericLinux.nixGL.packages = pkgs.nixgl;
       targets.genericLinux.nixGL.defaultWrapper = "nvidia";
       home.packages = [
@@ -61,8 +66,8 @@
       ];
     };
 
-    flake.modules.homeManager.nixgl-intel = { pkgs, ... }: {
-      home.packages = [ pkgs.nixgl.nixGLIntel ];
+    flake.modules.homeManager.nixgl-intel = {pkgs, ...}: {
+      home.packages = [pkgs.nixgl.nixGLIntel];
     };
   };
 }

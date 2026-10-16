@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   flake.modules.homeManager.fish = {
     programs.fish = {
       enable = true;

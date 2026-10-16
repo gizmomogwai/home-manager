@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.linux = { pkgs, ... }: {
+  flake.modules.homeManager.linux = {pkgs, ...}: {
     home.packages = with pkgs; [
       dive
       evince

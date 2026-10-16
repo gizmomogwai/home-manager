@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.darwin = { pkgs, ... }: {
+  flake.modules.homeManager.darwin = {pkgs, ...}: {
     home.packages = with pkgs; [
       choose-gui
       kanata

@@ -1,7 +1,7 @@
-{ inputs, ... }:
-{
-  flake.modules.homeManager.cli-tools = { pkgs, ... }: {
+{inputs, ...}: {
+  flake.modules.homeManager.cli-tools = {pkgs, ...}: {
     home.packages = with pkgs; [
+      alejandra
       babelfish
       byobu
       devenv

@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   # features every host gets
   flake.modules.homeManager.common.imports = with config.flake.modules.homeManager; [
     base

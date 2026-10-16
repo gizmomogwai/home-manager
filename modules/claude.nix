@@ -1,6 +1,6 @@
 {
-  flake.modules.homeManager.claude = { pkgs, ... }: {
-    home.packages = [ pkgs.claude-code ];
+  flake.modules.homeManager.claude = {pkgs, ...}: {
+    home.packages = [pkgs.claude-code];
 
     # Configuration placeholders (home-manager also has programs.claude-code, which
     # installs the package and manages these files; switch to it if you want that):

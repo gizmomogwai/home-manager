@@ -1,7 +1,7 @@
 {
-  flake.modules.homeManager.copilot = { pkgs, ... }: {
+  flake.modules.homeManager.copilot = {pkgs, ...}: {
     # GitHub Copilot CLI, binary `copilot`; log in once with `copilot` then `/login`
-    home.packages = [ pkgs.github-copilot-cli ];
+    home.packages = [pkgs.github-copilot-cli];
 
     # Configuration placeholders:
     #
