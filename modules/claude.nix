@@ -2,6 +2,12 @@
   flake.modules.homeManager.claude = {pkgs, ...}: {
     home.packages = [pkgs.claude-code];
 
+    programs.agent-skills.targets.claude = {
+      enable = true;
+      structure = "link";
+      dest = ".claude/skills";
+    };
+
     # Configuration placeholders (home-manager also has programs.claude-code, which
     # installs the package and manages these files; switch to it if you want that):
     #
@@ -16,7 +22,5 @@
     #
     # environment, e.g. to route through a gateway:
     # home.sessionVariables.ANTHROPIC_BASE_URL = "https://…";
-    #
-    # skills are managed in agent-skills.nix (targets.claude)
   };
 }

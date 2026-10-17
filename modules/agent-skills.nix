@@ -35,18 +35,6 @@
         dest = ".agents/skills";
       };
 
-      targets.claude = {
-        enable = true;
-        structure = "link";
-        dest = ".claude/skills";
-      };
-
-      targets.copilot = {
-        enable = true;
-        structure = "link";
-        dest = ".copilot/skills";
-      };
-
       # Configuration placeholders:
       #
       # new skill source: add a flake input (flake = false is fine), then
@@ -59,8 +47,8 @@
       # local, uncommitted-to-upstream skill living in this repo:
       # sources.local = { path = ./skills; };
       #
-      # another agent that reads skills from its own dir:
-      # targets.other-agent = { enable = true; structure = "link"; dest = ".other-agent/skills"; };
+      # in another agent's module, with agent-skills selected alongside it:
+      # programs.agent-skills.targets.other-agent = { enable = true; structure = "link"; dest = ".other-agent/skills"; };
     };
   };
 }

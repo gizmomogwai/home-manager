@@ -2,7 +2,7 @@
 #+TODO: TODO(t) IN-PROGRESS(p) | DONE(d) WONT-DO(w)
 
 Review of the current working tree, including uncommitted agent configuration.
-Proposals are ranked; some overlap. None has been implemented.
+Proposals are ranked; some overlap. Completed items are marked DONE.
 
 Keep the existing dendritic design: import-tree discovers flake-parts modules,
 named Home Manager modules define features, and three explicit machine modules
@@ -11,7 +11,7 @@ compose them. No new module framework, machine registry, or blanket enable flags
 Start with agent target ownership, then remove unused scaffolding and move
 overlay contributions beside their consumers.
 
-* TODO Let each agent module own its skills target
+* DONE Let each agent module own its skills target
 :PROPERTIES:
 :STRENGTH: Strong
 :END:

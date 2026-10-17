@@ -3,6 +3,12 @@
     # GitHub Copilot CLI, binary `copilot`; log in once with `copilot` then `/login`
     home.packages = [pkgs.github-copilot-cli];
 
+    programs.agent-skills.targets.copilot = {
+      enable = true;
+      structure = "link";
+      dest = ".copilot/skills";
+    };
+
     # Configuration placeholders:
     #
     # user settings, ~/.copilot/settings.json (config.json is app state, user keys there are ignored;
@@ -19,7 +25,5 @@
     # global instructions loaded into every session:
     # home.file.".copilot/copilot-instructions.md".source = ./copilot/copilot-instructions.md;
     # (more topic files: ~/.copilot/instructions/*.instructions.md)
-    #
-    # skills are managed in agent-skills.nix (targets.copilot)
   };
 }
