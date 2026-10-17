@@ -1,0 +1,103 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Prompt layout (powerline rounded segments):
+#
+#  [vc status]───[language]───[direnv]
+#  └ character
+#
+# vc status : $directory + ${custom.jj}
+# language  : $python $rust $ruby $nix_shell $typst
+# direnv    : ${custom.direnv_loaded|unloaded|blocked}
+# statuscode: $character (second line)
+
+#[](fg:vc_bg)\
+#[](fg:direnv_bg)\
+format = """
+(fg:vc_bg)\
+$directory\
+${custom.jj}\
+[](fg:vc_bg bg:lang_bg)\
+$python$rust$ruby$typst\
+[](fg:lang_bg bg:direnv_bg)\
+${custom.direnv_loaded}${custom.direnv_unloaded}${custom.direnv_blocked}\
+[](fg:direnv_bg)\
+$line_break$character"""
+add_newline = true
+
+palette = 'zenburn'
+
+[palettes.zenburn]
+fg        = '#dcdccc'  # zenburn fg     / ANSI white
+bg        = '#3f3f3f'  # zenburn bg     / ANSI black
+vc_bg     = '#f0dfaf'  # zenburn yellow / ANSI bright-white
+lang_bg   = '#7f9f7f'  # zenburn green  / ANSI green
+direnv_bg = '#8cd0d3'  # zenburn blue   / ANSI cyan
+green     = '#7f9f7f'  # zenburn green  / ANSI green
+red       = '#cc9393'  # zenburn red    / ANSI red
+yellow    = '#f0dfaf'  # zenburn yellow / ANSI yellow
+
+
+[directory]
+style = "fg:bg bg:vc_bg"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship", "--no-color", "--no-symbol", "--no-jj-prefix", "--no-git-prefix"]
+style = "fg:bg bg:vc_bg"
+format = "[$output]($style)"
+
+[git_branch]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_status]
+disabled = true
+
+[package]
+disabled = true
+
+[nix_shell]
+style = "fg:bg bg:lang_bg"
+format = '[$symbol$state(\($name\))]($style)'
+symbol = "❄️"
+
+[rust]
+style = "fg:bg bg:lang_bg"
+format = "[🦀($version)]($style)"
+
+[ruby]
+style = "fg:bg bg:lang_bg"
+version_format = "${raw}"
+format = "[$symbol($version)]($style)"
+symbol = "💎"
+[python]
+style = "fg:bg bg:lang_bg"
+version_format = "v${raw}"
+format = '[🐍${pyenv_prefix}(${version})]($style)'
+
+[custom.direnv_loaded]
+command = 'echo ✔'
+when = 'direnv status --json | jq -e ".state.loadedRC.allowed == 0" > /dev/null'
+style = "fg:bg bg:direnv_bg"
+format = "[.$output]($style)"
+
+[custom.direnv_unloaded]
+command = 'echo ✗'
+when = 'direnv status --json | jq -e ".state.foundRC == null" > /dev/null 2>&1'
+style = "fg:bg bg:direnv_bg"
+format = "[.$output]($style)"
+
+[custom.direnv_blocked]
+command = 'echo 🔑'
+when = 'direnv status --json | jq -e ".state.foundRC != null and .state.foundRC.allowed != 0" > /dev/null'
+style = "fg:bg bg:direnv_bg"
+format = "[.$output]($style)"
+
+[buf]
+format = "|[$symbol($version)]($style)"
+symbol = "🐃"

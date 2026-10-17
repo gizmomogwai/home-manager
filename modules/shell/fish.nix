@@ -10,6 +10,8 @@
       enableFishIntegration = true;
     };
 
+    xdg.configFile."starship.toml".source = ./starship.toml;
+
     programs.fish = {
       enable = true;
       plugins = [

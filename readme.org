@@ -12,6 +12,9 @@ The former =base= module is no longer exported; consumers should select =common=
 =modules/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
 Starship and direnv integrations. Select =fish= without a separate =prompt= module.
 Secret loading remains in =modules/secrets.nix=.
+Edit =modules/shell/starship.toml= for the prompt configuration; Home Manager links
+it to =~/.config/starship.toml= as a read-only file. Back up an existing unmanaged
+file on the first switch with =home-manager switch --flake . -b backup=.
 
 * Shared agent skills
 =modules/agent-skills.nix= owns skill sources, selection, the upstream Home Manager
