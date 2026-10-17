@@ -1,0 +1,396 @@
+#+TITLE: Home-manager config shortening proposals 2
+#+TODO: TODO(t) IN-PROGRESS(p) | DONE(d) WONT-DO(w)
+
+Second review of the current tree after the earlier cleanup in
+[[file:proposals.org][proposals.org]]. These proposals target remaining repetition and
+interface surface. They are proposals only; no behavior changes are included.
+
+* TODO Remove the =mkHome= module option
+:PROPERTIES:
+:STRENGTH: Strong
+:END:
+
+Files: [[file:modules/flake/home.nix][flake/home.nix]], [[file:modules/machines/][machines/]].
+
+Problem: =mkHome= is a read-only option used only by the three machine files.
+That makes a plain constructor look like shared Home Manager configuration.
+
+Change: define the constructor as a local function in =home.nix= and expose
+finished =flake.homeConfigurations= from the machine modules through one small
+shared helper, or inline the seven constructor lines if that is clearer.
+
+Benefit: removes one option declaration and makes the flake-construction
+boundary easier to follow.
+
+Preserve: package imports, overlay merging, module order, user names, systems,
+and home directories. Do not replace explicit machine outputs with a registry.
+
+Implementation sketch:
+
+#+begin_src nix
+# flake assembly layer
+mkHome = { system, user, homeDirectory, modules }:
+  inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = import inputs.nixpkgs { inherit system; };
+    modules = [{ home.username = user; home.homeDirectory = homeDirectory; }]
+      ++ modules;
+  };
+#+end_src
+
+Machine files call the shared constructor without declaring a Home Manager
+=mkOption=.
+
+New code location: [[file:modules/flake/home.nix][modules/flake/home.nix]]
+for the flake-level constructor; machine call sites remain in
+[[file:modules/machines/][modules/machines/]].
+
+LOC estimate: =home.nix= 43 -> 37 (-6); machine files 25 -> 25 (+0);
+combined 68 -> 62 (-6). Estimate excludes this proposal document.
+
+* TODO Consolidate the three machine declarations around shared host data
+:PROPERTIES:
+:STRENGTH: Worth exploring
+:END:
+
+Files: [[file:modules/machines/AMAFVFF202SQ05P.nix][AMAFVFF202SQ05P.nix]],
+[[file:modules/machines/ESR-ALCS-0002.nix][ESR-ALCS-0002.nix]],
+[[file:modules/machines/flunder.nix][flunder.nix]].
+
+Problem: each machine repeats the same =config.mkHome= shape and differs only
+in identity, platform modules, and nixGL selection.
+
+Change: share only the constructor invocation shape; keep one explicit record
+per machine. If the helper needs more than a few lines, skip this proposal.
+
+Benefit: less repeated scaffolding without hiding host-specific choices.
+
+Preserve: explicit output names and per-host module lists. Avoid a host
+registry or generated names.
+
+Implementation sketch:
+
+#+begin_src nix
+host = { system, user, homeDirectory, modules }:
+  config.mkHome { inherit system user homeDirectory modules; };
+
+flake.homeConfigurations."gizmo@flunder" =
+  host { system = "x86_64-linux"; user = "gizmo";
+         homeDirectory = "/home/gizmo"; modules = [ common linux ]; };
+#+end_src
+
+Keep one explicit record per host; do not generate output names.
+
+New code location: [[file:modules/flake/home.nix][modules/flake/home.nix]]
+for the shared helper; host data remains in each file under
+[[file:modules/machines/][modules/machines/]].
+
+LOC estimate: machine files 25 -> 20 (-5); shared flake code 43 -> 49 (+6);
+net combined 68 -> 69 (+1). This is a clarity proposal, not guaranteed LOC
+reduction; skip if the helper costs more than it saves.
+
+* TODO Merge the two platform modules into one platform feature
+:PROPERTIES:
+:STRENGTH: Speculative
+:END:
+
+Files: [[file/modules/platform/linux.nix][linux.nix]],
+[[file/modules/platform/darwin.nix][darwin.nix]], machine modules.
+
+Problem: each platform file is small, and the current split requires navigating
+two files for one nine-line platform policy.
+
+Change: put platform-specific package lists and =CK_OS= values beside the
+machine declarations, or use one =platform.nix= with two named modules.
+
+Benefit: fewer files only if platform policy is rarely edited independently.
+
+Preserve: Linux genericLinux/nixGL behavior and Darwin package selection.
+Prefer the current split if more platform settings are expected.
+
+Implementation sketch:
+
+#+begin_src nix
+flake.modules.homeManager = {
+  linux = { pkgs, ... }: { home.packages = with pkgs; [ ... ]; };
+  darwin = { pkgs, ... }: { home.packages = with pkgs; [ ... ]; };
+};
+#+end_src
+
+Machines continue selecting =linux= or =darwin=; only file placement changes.
+
+New code location: [[file:modules/platform.nix][modules/platform.nix]].
+Delete [[file:modules/platform/linux.nix][linux.nix]] and
+[[file:modules/platform/darwin.nix][darwin.nix]] after moving their definitions.
+
+LOC estimate: platform files 33 -> 31 (-2); new combined file included; machine
+files 25 -> 25 (+0). Net about 33 -> 31 (-2), excluding import-tree movement
+noise.
+
+* TODO Move =CK_OS= into machine modules
+:PROPERTIES:
+:STRENGTH: Worth exploring
+:END:
+
+Files: [[file/modules/platform/linux.nix][linux.nix]],
+[[file/modules/platform/darwin.nix][darwin.nix]], machine modules.
+
+Problem: =CK_OS= is host identity, while the platform modules also own package
+and genericLinux behavior. The value is duplicated conceptually with each
+machine's system declaration.
+
+Change: set =home.sessionVariables.CK_OS= in each machine module and remove the
+two one-entry platform attribute sets.
+
+Benefit: removes a small indirection and makes the host value visible beside
+the selected system.
+
+Preserve: exact values =linux= and =osx=. Keep package policy in platform
+modules unless those modules are also removed.
+
+Implementation sketch:
+
+#+begin_src nix
+# modules/machines/flunder.nix
+flake.homeConfigurations."gizmo@flunder" = config.mkHome {
+  # existing fields...
+  modules = [ common linux nixgl-intel ];
+  # merged into the selected Home Manager config
+};
+# common/platform-independent equivalent:
+home.sessionVariables.CK_OS = "linux";
+#+end_src
+
+In practice, place the session variable in each machine's selected module
+attrs, then delete only the platform session-variable blocks.
+
+New code location: the existing files under
+[[file:modules/machines/][modules/machines/]]; no new file.
+
+LOC estimate: platform files 33 -> 29 (-4); machine files 25 -> 27 (+2);
+combined 58 -> 56 (-2).
+
+* TODO Replace the dynamic own-app package map with a direct package list
+:PROPERTIES:
+:STRENGTH: Worth exploring
+:END:
+
+File: [[modules/features/own-apps.nix][own-apps.nix]].
+
+Problem: the five package names are hidden behind dynamic attribute lookup:
+=inputs.${app}.packages.${pkgs.stdenv.hostPlatform.system}.default=.
+
+Change: use five direct package references, or a short local package list with
+the same explicit references.
+
+Benefit: readers can see each dependency immediately and Nix errors identify
+the failing input without tracing a string list.
+
+Preserve: default package selection and host-platform resolution. Keep the map
+if more applications are added frequently and the list would otherwise repeat
+the same expression.
+
+Implementation sketch:
+
+#+begin_src nix
+system = pkgs.stdenv.hostPlatform.system;
+home.packages = [
+  inputs.dime.packages.${system}.default
+  inputs.donies.packages.${system}.default
+  inputs.sesame.packages.${system}.default
+  inputs.spotify-dl.packages.${system}.default
+  inputs.worker.packages.${system}.default
+];
+#+end_src
+
+The exact input names stay visible; only the string-driven lookup disappears.
+
+New code location: existing
+[[file:modules/features/own-apps.nix][modules/features/own-apps.nix]]; no new
+file.
+
+LOC estimate: =own-apps.nix= 11 -> 13 (+2). LOC rises slightly; payoff is
+clearer dependency ownership and better evaluation errors, not line reduction.
+
+* TODO Delete unused flake package exposure
+:PROPERTIES:
+:STRENGTH: Strong if unused
+:END:
+
+File: [[file/modules/flake/flake-parts.nix][flake-parts.nix]].
+
+Problem: the flake exports =packages.home-manager= even though the documented
+workflow invokes the input's Home Manager command directly.
+
+Change: remove the =perSystem.packages.home-manager= output after checking
+downstream users with =nix flake show= and repository search.
+
+Benefit: fewer outputs and less assembly code.
+
+Preserve: the documented switch command and any CI or external consumer that
+uses =.#home-manager=. Keep this output if either exists.
+
+Implementation sketch:
+
+#+begin_src nix
+perSystem = { system, ... }: {
+  # delete packages.home-manager
+};
+#+end_src
+
+Leave =flake.homeConfigurations= and module exports untouched.
+
+New code location: none; only
+[[file:modules/flake/flake-parts.nix][modules/flake/flake-parts.nix]] changes.
+
+LOC estimate: =flake-parts.nix= 13 -> 8 (-5).
+
+* TODO Remove obsolete commented nixGL input code
+:PROPERTIES:
+:STRENGTH: Strong
+:END:
+
+File: [[file:flake.nix][flake.nix]].
+
+Problem: the commented =nixgl.url= and adjacent pull-request URL compete with
+the active pinned input and make the dependency block look ambiguous.
+
+Change: delete the commented alternative. Keep the active pin and the reason
+for the local GBM patch in [[file:modules/features/nixgl.nix][nixgl.nix]].
+
+Benefit: shorter input list with one authoritative nixGL source.
+
+Preserve: active input URL, patch behavior, and diagnostic documentation.
+
+Implementation sketch:
+
+#+begin_src nix
+nixgl = {
+  url = "github:TheTeXnician/nixGL/<pin>";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+#+end_src
+
+Delete only the commented upstream URL and pull-request reference above it.
+
+New code location: none; only the existing
+[[file:flake.nix][flake.nix]] is shortened.
+
+LOC estimate: =flake.nix= 83 -> 80 (-3).
+
+* TODO Move stable input comments next to the consumers
+:PROPERTIES:
+:STRENGTH: Worth exploring
+:END:
+
+Files: [[file:flake.nix][flake.nix]], feature modules.
+
+Problem: rationale for independent updates is split between input declarations
+and consuming modules, especially for =herdr= and non-flake inputs.
+
+Change: keep only concise dependency syntax in =flake.nix= and move consumer
+update instructions beside the package or source usage.
+
+Benefit: the input block becomes a compact dependency inventory; operational
+notes stay where the dependency matters.
+
+Preserve: commands, pinning policy, and warnings about =flake = false= inputs.
+
+Implementation sketch:
+
+#+begin_src nix
+# flake.nix: dependency only
+herdr = {
+  url = "github:herdrdev/herdr";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+
+# modules/features/herdr.nix: consumer guidance
+# Update independently: nix flake update herdr
+#+end_src
+
+Apply same move only to comments that explain actual consumer behavior.
+
+New code location: [[file:modules/features/herdr.nix][modules/features/herdr.nix]]
+for =herdr= guidance; other guidance belongs in the feature file that consumes
+each input. No new file.
+
+LOC estimate: =flake.nix= 83 -> 77 (-6); consumer files 42 -> 47 (+5);
+combined 125 -> 124 (-1).
+
+* TODO Fold one-line policy modules into their owning feature
+:PROPERTIES:
+:STRENGTH: Speculative
+:END:
+
+Files: [[file/modules/features/global-cargo-settings.nix][global-cargo-settings.nix]],
+[[file/modules/features/fonts.nix][fonts.nix]],
+[[file/modules/features/dlang.nix][dlang.nix]].
+
+Problem: several files contain one small declaration, increasing directory
+surface without providing a meaningful selection boundary; all are selected by
+=common=.
+
+Change: fold =global-cargo-settings= into the development feature that requires
+it, and combine only genuinely related package policy such as fonts with the
+desktop/editor feature that owns its use.
+
+Benefit: fewer files and imports.
+
+Preserve: package availability and =CARGO_TARGET_DIR=. Do not combine unrelated
+features merely to reduce file count; keep a standalone module when it is
+useful to select or disable independently.
+
+Implementation sketch:
+
+#+begin_src nix
+# modules/features/editor.nix
+flake.modules.homeManager.editor = {
+  home.sessionVariables.CARGO_TARGET_DIR = "/tmp/cargo-target";
+  home.packages = with pkgs; [ emacs ... ];
+};
+#+end_src
+
+Remove the corresponding =common= import and file only after ownership is
+settled. Keep =dlang.nix= separate unless it loses its independent boundary.
+
+New code location: existing owning feature files, primarily
+[[file:modules/features/editor.nix][modules/features/editor.nix]]; delete
+[[file:modules/features/global-cargo-settings.nix][global-cargo-settings.nix]]
+only after moving its setting. No new file.
+
+LOC estimate: one-line policy modules 14 -> 0 (-14); imports 18 -> 16 (-2);
+owning feature files 30 -> 34 (+4); approximate net 62 -> 50 (-12).
+
+* TODO Remove placeholder configuration comments from =herdr=
+:PROPERTIES:
+:STRENGTH: Strong
+:END:
+
+File: [[file/modules/features/herdr.nix][herdr.nix]].
+
+Problem: commented config-file, environment-variable, and shell-alias
+placeholders add lines without documenting active behavior.
+
+Change: delete the placeholder block. Add real settings only when herdr
+configuration is required.
+
+Benefit: the module shows only the package build and patch that currently run.
+
+Preserve: Rust toolchain selection, local patch application, and package
+override behavior. Keep the upstream patch-removal note in =readme.org=.
+
+Implementation sketch:
+
+#+begin_src nix
+flake.modules.homeManager.herdr = { pkgs, ... }: {
+  home.packages = [ patchedHerdr ];
+  # no commented config templates until real settings exist
+};
+#+end_src
+
+Do not replace placeholders with new configuration options.
+
+New code location: none; only
+[[file:modules/features/herdr.nix][modules/features/herdr.nix]] is shortened.
+
+LOC estimate: =herdr.nix= 42 -> 30 (-12).
