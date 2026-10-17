@@ -100,7 +100,7 @@ Preserve: =home.stateVersion=, release-check policy, session path, and Home Mana
 enablement. All current machines use =common=; retain =base= if external consumers
 depend on that exported module name.
 
-* TODO Combine Fish-specific prompt setup with Fish
+* DONE Combine Fish-specific prompt setup with Fish
 :PROPERTIES:
 :STRENGTH: Worth exploring
 :END:

@@ -1,5 +1,15 @@
 {inputs, ...}: {
   flake.modules.homeManager.fish = {
+    programs.direnv = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    programs.starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     programs.fish = {
       enable = true;
       plugins = [

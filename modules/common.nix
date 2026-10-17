@@ -15,7 +15,6 @@
       ghostty
       global-cargo-settings
       herdr
-      prompt
       secrets
     ];
 

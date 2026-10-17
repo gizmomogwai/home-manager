@@ -8,6 +8,11 @@ release-check policy, session path, and Home Manager enablement for all hosts.
 =modules/lib/home.nix= handles home construction and overlay composition.
 The former =base= module is no longer exported; consumers should select =common=.
 
+* Fish shell
+=modules/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
+Starship and direnv integrations. Select =fish= without a separate =prompt= module.
+Secret loading remains in =modules/secrets.nix=.
+
 * Shared agent skills
 =modules/agent-skills.nix= owns skill sources, selection, the upstream Home Manager
 module import, and the generic =~/.agents/skills= target. =modules/claude.nix= and
