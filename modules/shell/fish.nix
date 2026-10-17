@@ -1,5 +1,7 @@
 {inputs, ...}: {
-  flake.modules.homeManager.fish = {
+  flake.modules.homeManager.fish = {pkgs, ...}: {
+    home.packages = [pkgs.moor];
+
     programs.direnv = {
       enable = true;
       enableFishIntegration = true;

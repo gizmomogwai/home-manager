@@ -25,7 +25,6 @@
       jj-starship
       lazyjj
       lua
-      moor
       nix-tree
       pandoc
       proton-cli

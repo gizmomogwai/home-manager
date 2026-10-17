@@ -105,7 +105,7 @@ depend on that exported module name.
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/shell/fish.nix][shell/fish.nix]], [[file:modules/shell/prompt.nix][shell/prompt.nix]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/shell/fish.nix][shell/fish.nix]], [[file:modules/shell/starship.toml][shell/starship.toml]], [[file:modules/common.nix][common.nix]].
 
 Problem: =prompt= configures both Starship and direnv with Fish integration.
 Every current machine selects it together with Fish.
@@ -121,7 +121,11 @@ Benefit: more depth behind one shell interface and fewer files to inspect.
 Preserve: both integrations, plugins, aliases, and exact shell initialization
 behavior. Keep the split if independent prompt selection is a real requirement.
 
-* TODO Install moor beside the Fish alias that requires it
+Implemented: removed =prompt.nix= and its import. Fish also owns the existing
+Starship configuration, preserved in =modules/shell/starship.toml= and linked to
+=~/.config/starship.toml= by Home Manager.
+
+* DONE Install moor beside the Fish alias that requires it
 :PROPERTIES:
 :STRENGTH: Strong
 :END:
