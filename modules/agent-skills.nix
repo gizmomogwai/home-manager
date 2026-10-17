@@ -34,21 +34,6 @@
         # link needs a static path relative to $HOME (the default "$HOME/.agents/skills" is rejected)
         dest = ".agents/skills";
       };
-
-      # Configuration placeholders:
-      #
-      # new skill source: add a flake input (flake = false is fine), then
-      # sources.my-skills = { path = inputs.my-skills; subdir = "skills"; filter.maxDepth = 1; };
-      # skills.enableAll = [ "ponytail" "caveman" "my-skills" ];
-      #
-      # only some skills of a source (instead of enableAll):
-      # skills.explicit.pdf = { from = "my-skills"; path = "pdf"; };
-      #
-      # local, uncommitted-to-upstream skill living in this repo:
-      # sources.local = { path = ./skills; };
-      #
-      # in another agent's module, with agent-skills selected alongside it:
-      # programs.agent-skills.targets.other-agent = { enable = true; structure = "link"; dest = ".other-agent/skills"; };
     };
   };
 }

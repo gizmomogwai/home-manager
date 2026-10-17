@@ -34,7 +34,7 @@ without new files or options.
 Preserve: all three destinations, link mode, and selected skills. Keep the shared
 skills module selected whenever these target declarations are used.
 
-* TODO Remove unused configuration scaffolding
+* DONE Remove unused configuration scaffolding
 :PROPERTIES:
 :STRENGTH: Strong
 :END:
