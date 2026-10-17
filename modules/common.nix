@@ -1,21 +1,28 @@
 {config, ...}: {
-  # features every host gets
-  flake.modules.homeManager.common.imports = with config.flake.modules.homeManager; [
-    base
-    agent-skills
-    apps-own
-    bookmarks
-    claude
-    cli-tools
-    copilot
-    dlang
-    editor
-    fish
-    fonts
-    ghostty
-    global-cargo-settings
-    herdr
-    prompt
-    secrets
-  ];
+  flake.modules.homeManager.common = {
+    # features every host gets
+    imports = with config.flake.modules.homeManager; [
+      agent-skills
+      apps-own
+      bookmarks
+      claude
+      cli-tools
+      copilot
+      dlang
+      editor
+      fish
+      fonts
+      ghostty
+      global-cargo-settings
+      herdr
+      prompt
+      secrets
+    ];
+
+    home.stateVersion = "25.05"; # Please read the comment before changing.
+    home.enableNixpkgsReleaseCheck = false;
+    home.sessionPath = ["$HOME/bin"];
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+  };
 }

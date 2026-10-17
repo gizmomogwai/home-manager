@@ -2,6 +2,12 @@
 nix flake update
 home-manager switch --flake .  # picks homeConfigurations."$USER@$(hostname)" from modules/machines
 
+* Common home policy
+=modules/common.nix= selects shared features and owns =home.stateVersion=,
+release-check policy, session path, and Home Manager enablement for all hosts.
+=modules/lib/home.nix= handles home construction and overlay composition.
+The former =base= module is no longer exported; consumers should select =common=.
+
 * Shared agent skills
 =modules/agent-skills.nix= owns skill sources, selection, the upstream Home Manager
 module import, and the generic =~/.agents/skills= target. =modules/claude.nix= and

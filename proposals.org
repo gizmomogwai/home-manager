@@ -78,7 +78,7 @@ Preserve: effective overlay order and package derivations. Contributions still
 merge globally: moving them does not make overlays conditional on Home Manager
 feature selection, and does not itself promise faster evaluation.
 
-* TODO Fold base home policy into the common profile
+* DONE Fold base home policy into the common profile
 :PROPERTIES:
 :STRENGTH: Worth exploring
 :END:
