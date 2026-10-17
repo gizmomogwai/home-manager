@@ -8,15 +8,16 @@ Keep the existing dendritic design: import-tree discovers flake-parts modules,
 named Home Manager modules define features, and three explicit machine modules
 compose them. No new module framework, machine registry, or blanket enable flags.
 
-Start with agent target ownership, then remove unused scaffolding and move
-overlay contributions beside their consumers.
+Completed: agent target ownership, scaffolding cleanup, feature-owned overlays,
+common home policy, Fish consolidation, moor ownership, application inventories,
+own-app ownership, and directory layout. Only the deferred NVIDIA pin proposal remains.
 
 * DONE Let each agent module own its skills target
 :PROPERTIES:
 :STRENGTH: Strong
 :END:
 
-Files: [[file:modules/agent-skills.nix][agent-skills.nix]], [[file:modules/claude.nix][claude.nix]], [[file:modules/copilot.nix][copilot.nix]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/features/agent-skills.nix][agent-skills.nix]], [[file:modules/features/claude.nix][claude.nix]], [[file:modules/features/copilot.nix][copilot.nix]], [[file:modules/profiles/common.nix][common.nix]].
 
 Problem: agent packages live in their own modules, but their skills targets live
 in the shared skills module. Agent-specific knowledge crosses that seam.
@@ -39,7 +40,7 @@ skills module selected whenever these target declarations are used.
 :STRENGTH: Strong
 :END:
 
-Files: [[file:modules/claude.nix][claude.nix]], [[file:modules/copilot.nix][copilot.nix]], [[file:modules/agent-skills.nix][agent-skills.nix]].
+Files: [[file:modules/features/claude.nix][claude.nix]], [[file:modules/features/copilot.nix][copilot.nix]], [[file:modules/features/agent-skills.nix][agent-skills.nix]].
 
 Problem: commented-out future settings, MCP configuration, gateways, and skill
 examples obscure the active implementation.
@@ -61,7 +62,7 @@ relative link-path requirements.
 :STRENGTH: Strong
 :END:
 
-Files: [[file:modules/lib/home.nix][lib/home.nix]], [[file:modules/editor.nix][editor.nix]], [[file:modules/herdr.nix][herdr.nix]], [[file:modules/nixgl.nix][nixgl.nix]].
+Files: [[file:modules/flake/home.nix][flake/home.nix]], [[file:modules/features/editor.nix][editor.nix]], [[file:modules/features/herdr.nix][herdr.nix]], [[file:modules/features/nixgl.nix][nixgl.nix]].
 
 Problem: the generic home-construction module selects Rust and Emacs overlays.
 Their consumers live elsewhere, while nixGL already contributes its own overlay.
@@ -83,7 +84,7 @@ feature selection, and does not itself promise faster evaluation.
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/lib/home.nix][lib/home.nix]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/flake/home.nix][flake/home.nix]], [[file:modules/profiles/common.nix][common.nix]].
 
 Problem: the home-construction module also defines a small =base= policy module
 that the common profile imports.
@@ -105,7 +106,7 @@ depend on that exported module name.
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/shell/fish.nix][shell/fish.nix]], [[file:modules/shell/starship.toml][shell/starship.toml]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/features/shell/fish.nix][shell/fish.nix]], [[file:modules/features/shell/starship.toml][shell/starship.toml]], [[file:modules/profiles/common.nix][common.nix]].
 
 Problem: =prompt= configures both Starship and direnv with Fish integration.
 Every current machine selects it together with Fish.
@@ -122,7 +123,7 @@ Preserve: both integrations, plugins, aliases, and exact shell initialization
 behavior. Keep the split if independent prompt selection is a real requirement.
 
 Implemented: removed =prompt.nix= and its import. Fish also owns the existing
-Starship configuration, preserved in =modules/shell/starship.toml= and linked to
+Starship configuration, preserved in =modules/features/shell/starship.toml= and linked to
 =~/.config/starship.toml= by Home Manager.
 
 * DONE Install moor beside the Fish alias that requires it
@@ -130,7 +131,7 @@ Starship configuration, preserved in =modules/shell/starship.toml= and linked to
 :STRENGTH: Strong
 :END:
 
-Files: [[file:modules/shell/fish.nix][shell/fish.nix]], [[file:modules/cli-tools.nix][cli-tools.nix]].
+Files: [[file:modules/features/shell/fish.nix][shell/fish.nix]], [[file:modules/features/cli-tools.nix][cli-tools.nix]].
 
 Problem: Fish defines =less = moor=, but =cli-tools= supplies the executable.
 Selecting the Fish module alone leaves an implicit package dependency.
@@ -149,7 +150,7 @@ Preserve: the alias and the package set of every current machine.
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/desktop-apps.nix][desktop-apps.nix]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/features/cli-tools.nix][cli-tools.nix]], [[file:modules/features/desktop-apps.nix][desktop-apps.nix]], [[file:modules/profiles/common.nix][common.nix]].
 
 Problem: selecting =cli-tools= also installs Firefox, Chrome, Slack, and Zeal.
 The module name does not describe its actual interface.
@@ -167,33 +168,73 @@ module to =tools= is the smaller alternative.
 Preserve: identical package selection on all current hosts. Moving declarations
 does not fix platform availability or intentionally remove desktop applications.
 
-* TODO Put spotify-dl with the existing own-app inventory
+Implemented: generic graphical apps live in =desktop-apps.nix=. The cohesive
+password-manager feature lives in =proton-pass.nix=, which owns both =proton-cli=
+and the =proton-pass= desktop app. =common= selects both modules.
+
+* DONE Put spotify-dl and donies with the existing own-app inventory
 :PROPERTIES:
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/own-apps.nix][own-apps.nix]], [[file:flake.nix][flake.nix]].
+Files: [[file:modules/features/cli-tools.nix][cli-tools.nix]], [[file:modules/features/own-apps.nix][own-apps.nix]], [[file:flake.nix][flake.nix]].
 
 Problem: =own-apps= resolves default packages for dime, sesame, and worker;
-=cli-tools= separately performs the same lookup for spotify-dl.
+=cli-tools= separately performs the same lookup for spotify-dl and donies.
 
-Change: add =spotify-dl= to the existing =own-apps= list. Remove its declaration
-from =cli-tools=; retain that file's outer =inputs= argument for =donies=.
+Change: add =spotify-dl= and =donies= to the existing =own-apps= list. Remove their
+declarations from =cli-tools= and its now-unused outer =inputs= argument.
 
 Before: plain input-backed package selection spread across two modules.
-After: own-apps contains all four declarations.
+After: own-apps contains all five declarations.
 
 Benefit: reuse the existing implementation and shrink the cli-tools interface.
 
 Preserve: the exact input, default package, and host-platform system selection.
 Keep bookmarks and herdr separate: they carry additional integration/build policy.
 
+Implemented: =own-apps.nix= (renamed from =apps-own.nix=) now selects =spotify-dl=
+and =donies= alongside dime, sesame, and worker.
+
+* DONE Separate feature and composition directories only if navigation hurts
+:PROPERTIES:
+:STRENGTH: Speculative
+:END:
+
+Files: [[file:flake.nix][flake.nix]], [[file:modules/profiles/common.nix][common.nix]], [[file:modules/flake/home.nix][flake/home.nix]], [[file:modules/flake/flake-parts.nix][flake-parts.nix]],
+[[file:modules/machines/][machines/]], [[file:modules/platform/][platform/]], and existing feature modules.
+
+Problem: the top of =modules/= mixes feature implementations with flake and
+profile composition.
+
+Change: optionally group existing files under =features/=, =profiles/=, and
+=flake/=, alongside the existing =machines/= and =platform/= directories.
+Keep exported module names and recursive import-tree discovery unchanged.
+
+Before: mixed file roles at the top of modules.
+After: file locations communicate feature versus composition ownership.
+
+Benefit: navigation locality only; no additional depth or runtime leverage.
+Lowest priority at this repository size. Skip unless current navigation is painful.
+
+Preserve: all relative patch/source references, exports, and machine outputs.
+Do not add manual =default.nix= import lists or a new discovery mechanism.
+
+Implemented: features (including Fish and its Starship config) live under
+=modules/features/=, common policy under =modules/profiles/=, and flake setup and
+home construction under =modules/flake/=. Machine and platform directories remain
+in place. Updated patch references, documentation links, and the nixGL diagnostic
+edit path; NVIDIA pins and wrapper behavior are unchanged.
+
 * TODO Make NVIDIA pins local values unless overrides are needed
 :PROPERTIES:
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/nixgl.nix][nixgl.nix]], [[file:modules/machines/ESR-ALCS-0002.nix][machines/ESR-ALCS-0002.nix]].
+Deferred: no suitable setup is currently available to test nixGL. Revisit only
+when the target hardware is available for validation.
+
+Files: [[file:modules/features/nixgl.nix][nixgl.nix]], [[file:modules/machines/ESR-ALCS-0002.nix][machines/ESR-ALCS-0002.nix]].
 
 Problem: two top-level options expose the driver's version and hash, but current
 machine modules do not override them.
@@ -214,33 +255,12 @@ would instead justify host-specific pin ownership.
 Do not unify the Intel and NVIDIA adapters merely for symmetry. Their different
 wrapping behavior is outside this cleanup.
 
-* TODO Separate feature and composition directories only if navigation hurts
-:PROPERTIES:
-:STRENGTH: Speculative
-:END:
-
-Files: [[file:flake.nix][flake.nix]], [[file:modules/common.nix][common.nix]], [[file:modules/lib/home.nix][lib/home.nix]], [[file:modules/flake-parts.nix][flake-parts.nix]],
-[[file:modules/machines/][machines/]], [[file:modules/platform/][platform/]], and existing feature modules.
-
-Problem: the top of =modules/= mixes feature implementations with flake and
-profile composition.
-
-Change: optionally group existing files under =features/=, =profiles/=, and
-=flake/=, alongside the existing =machines/= and =platform/= directories.
-Keep exported module names and recursive import-tree discovery unchanged.
-
-Before: mixed file roles at the top of modules.
-After: file locations communicate feature versus composition ownership.
-
-Benefit: navigation locality only; no additional depth or runtime leverage.
-Lowest priority at this repository size. Skip unless current navigation is painful.
-
-Preserve: all relative patch/source references, exports, and machine outputs.
-Do not add manual =default.nix= import lists or a new discovery mechanism.
-
 * Verification when implementing
 
-No evaluation or activation was performed for this proposal-only review.
+The original review was proposal-only. Completed refactors were checked against
+their pre-change configurations across all three hosts. The Starship config
+import was also activated on the current host; later refactors were not activated
+as part of their implementation.
 
 For behavioral or structural changes, compare evaluated package sets, selected
 settings, and generated files across all three existing home configurations.

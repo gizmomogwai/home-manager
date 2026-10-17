@@ -25,7 +25,7 @@
             name = "nixGL-patched";
             src = inputs.nixgl;
             # upstream sets GBM_BACKENDS_PATH only for mesa; webkitgtk then loads mesa's dri_gbm.so
-            patches = [../nixgl-nvidia-gbm.patch];
+            patches = [../../nixgl-nvidia-gbm.patch];
           }) {
             pkgs = final;
             inherit (config) nvidiaVersion nvidiaHash;
@@ -59,7 +59,7 @@
           if [ "$host_version" = "$pinned_version" ]; then
             echo "OK: versions match"
           else
-            echo "MISMATCH: update nvidiaVersion and nvidiaHash in ~/.config/home-manager/modules/nixgl.nix"
+            echo "MISMATCH: update nvidiaVersion and nvidiaHash in ~/.config/home-manager/modules/features/nixgl.nix"
             exit 1
           fi
         '')

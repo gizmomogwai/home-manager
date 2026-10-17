@@ -1,11 +1,10 @@
-{inputs, ...}: {
+{
   flake.modules.homeManager.cli-tools = {pkgs, ...}: {
     home.packages = with pkgs; [
       alejandra
       babelfish
       byobu
       devenv
-      inputs.donies.packages.${stdenv.hostPlatform.system}.default
       fd
       ffmpeg
       fzf
@@ -28,7 +27,6 @@
       ripgrep
       rsync
       rtk
-      inputs.spotify-dl.packages.${stdenv.hostPlatform.system}.default
       tealdeer
       tig
       tree

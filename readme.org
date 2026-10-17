@@ -2,50 +2,79 @@
 nix flake update
 home-manager switch --flake .  # picks homeConfigurations."$USER@$(hostname)" from modules/machines
 
+* Module layout
+Directories separate implementation, selection, and construction:
+
+- =modules/features/=: what a capability installs and configures. Each named
+  Home Manager module owns a cohesive feature, including its packages, settings,
+  and supporting files. For example, =proton-pass.nix= owns both Proton clients;
+  =shell/fish.nix= owns Fish and its prompt integrations. Features may also
+  contribute build dependencies through the shared flake-level overlays option.
+- =modules/profiles/=: which features belong together, plus their shared policy.
+  =common.nix= imports the features every current host gets and sets baseline
+  policy such as =home.stateVersion=. Put shared feature selection here, not
+  individual application configuration.
+- =modules/flake/=: how the configuration is assembled and exposed as flake
+  outputs. =flake-parts.nix= enables module exports and Home Manager outputs;
+  =home.nix= defines =mkHome= and the shared overlays option. This layer constructs
+  Home Manager configurations without choosing their applications.
+
+=modules/machines/= supplies each host's system, user, home directory, and module
+selection to =mkHome=. =modules/platform/= owns Linux- or Darwin-specific policy.
+For example: a machine selects =common= plus =linux=; =common= selects =fish=;
+=fish= defines the shell setup; =mkHome= assembles the resulting configuration.
+
+These directories are organizational, not a new module system. =import-tree=
+still discovers all Nix files recursively. Named Home Manager modules take effect
+when selected through imports; flake-level contributions such as overlays still
+merge globally. Moving a file does not rename its exported module.
+
 * Common home policy
-=modules/common.nix= selects shared features and owns =home.stateVersion=,
+=modules/profiles/common.nix= selects shared features and owns =home.stateVersion=,
 release-check policy, session path, and Home Manager enablement for all hosts.
-=modules/lib/home.nix= handles home construction and overlay composition.
+=modules/flake/home.nix= handles home construction and overlay composition.
 The former =base= module is no longer exported; consumers should select =common=.
 
 * Application inventories
-=modules/cli-tools.nix= owns terminal tools; =modules/desktop-apps.nix= owns
+=modules/features/cli-tools.nix= owns terminal tools; =modules/features/desktop-apps.nix= owns
 graphical applications. =common= selects both, preserving desktop apps on all hosts.
-=modules/proton-pass.nix= owns the password-manager experience: =proton-cli= and
+=modules/features/proton-pass.nix= owns the password-manager experience: =proton-cli= and
 the =proton-pass= desktop app, selected together by =common=.
+=modules/features/own-apps.nix= selects the default input-backed packages for dime, donies,
+sesame, spotify-dl, and worker.
 
 * Fish shell
-=modules/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
+=modules/features/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
 Starship and direnv integrations. Select =fish= without a separate =prompt= module.
 Fish also installs =moor= for its =less= alias.
-Secret loading remains in =modules/secrets.nix=.
-Edit =modules/shell/starship.toml= for the prompt configuration; Home Manager links
+Secret loading remains in =modules/features/secrets.nix=.
+Edit =modules/features/shell/starship.toml= for the prompt configuration; Home Manager links
 it to =~/.config/starship.toml= as a read-only file. Back up an existing unmanaged
 file on the first switch with =home-manager switch --flake . -b backup=.
 
 * Shared agent skills
-=modules/agent-skills.nix= owns skill sources, selection, the upstream Home Manager
-module import, and the generic =~/.agents/skills= target. =modules/claude.nix= and
-=modules/copilot.nix= own their packages and respective skills targets.
+=modules/features/agent-skills.nix= owns skill sources, selection, the upstream Home Manager
+module import, and the generic =~/.agents/skills= target. =modules/features/claude.nix= and
+=modules/features/copilot.nix= own their packages and respective skills targets.
 
-=modules/common.nix= selects all three modules. Nix merges their declarations:
+=modules/profiles/common.nix= selects all three modules. Nix merges their declarations:
 each target uses the same selected skills bundle in the Nix store, linked into
 =~/.agents/skills=, =~/.claude/skills=, and =~/.copilot/skills=. No duplicated skill
-definitions or content; add or remove skills only in =modules/agent-skills.nix=.
+definitions or content; add or remove skills only in =modules/features/agent-skills.nix=.
 Agent-specific settings and instructions stay in their respective agent modules.
 
 When composing a profile without =common=, select =agent-skills= alongside any
 agent module. New agents need only their own target declaration, not a skill list.
 
 * Feature-owned overlays
-=modules/editor.nix= contributes the Emacs overlay; =modules/herdr.nix= contributes
-the Rust overlay; =modules/nixgl.nix= contributes nixGL. =modules/lib/home.nix=
+=modules/features/editor.nix= contributes the Emacs overlay; =modules/features/herdr.nix= contributes
+the Rust overlay; =modules/features/nixgl.nix= contributes nixGL. =modules/flake/home.nix=
 only declares and consumes the shared =overlays= option. Contributions still apply
 globally to every home configuration, regardless of Home Manager feature selection.
 
 * herdr Copilot detection patch
 =patches/herdr-copilot-detection.patch= fixes detection of Nix-packaged Copilot
-running as =node= or =MainThread=. Applied by =modules/herdr.nix=; includes
+running as =node= or =MainThread=. Applied by =modules/features/herdr.nix=; includes
 regression tests in upstream's =src/detect/mod.rs=.
 
 Based on herdr =916fcf8de029c6cac965b50f3cdb9687cd7d1537=. In an upstream checkout:

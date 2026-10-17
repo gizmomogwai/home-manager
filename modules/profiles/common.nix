@@ -20,7 +20,7 @@
       secrets
     ];
 
-    home.stateVersion = "25.05"; # Please read the comment before changing.
+    home.stateVersion = "25.05";
     home.enableNixpkgsReleaseCheck = false;
     home.sessionPath = ["$HOME/bin"];
     # Let Home Manager install and manage itself.

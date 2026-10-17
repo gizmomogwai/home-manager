@@ -22,7 +22,7 @@
             rustc = toolchain;
           };
         }).overrideAttrs (previous: {
-          patches = (previous.patches or []) ++ [../patches/herdr-copilot-detection.patch];
+          patches = (previous.patches or []) ++ [../../patches/herdr-copilot-detection.patch];
         }))
     ];
 
