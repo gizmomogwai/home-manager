@@ -144,12 +144,12 @@ Benefit: better locality and a self-contained module interface.
 
 Preserve: the alias and the package set of every current machine.
 
-* TODO Take desktop applications out of cli-tools
+* DONE Take desktop applications out of cli-tools
 :PROPERTIES:
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/common.nix][common.nix]].
+Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/desktop-apps.nix][desktop-apps.nix]], [[file:modules/common.nix][common.nix]].
 
 Problem: selecting =cli-tools= also installs Firefox, Chrome, Slack, and Zeal.
 The module name does not describe its actual interface.
@@ -172,16 +172,16 @@ does not fix platform availability or intentionally remove desktop applications.
 :STRENGTH: Worth exploring
 :END:
 
-Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/apps-own.nix][apps-own.nix]], [[file:flake.nix][flake.nix]].
+Files: [[file:modules/cli-tools.nix][cli-tools.nix]], [[file:modules/own-apps.nix][own-apps.nix]], [[file:flake.nix][flake.nix]].
 
-Problem: =apps-own= resolves default packages for dime, sesame, and worker;
+Problem: =own-apps= resolves default packages for dime, sesame, and worker;
 =cli-tools= separately performs the same lookup for spotify-dl.
 
-Change: add =spotify-dl= to the existing =apps-own= list. Remove its declaration
-from =cli-tools= and remove that file's now-unused outer =inputs= argument.
+Change: add =spotify-dl= to the existing =own-apps= list. Remove its declaration
+from =cli-tools=; retain that file's outer =inputs= argument for =donies=.
 
 Before: plain input-backed package selection spread across two modules.
-After: apps-own contains all four declarations.
+After: own-apps contains all four declarations.
 
 Benefit: reuse the existing implementation and shrink the cli-tools interface.
 

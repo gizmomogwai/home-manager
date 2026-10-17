@@ -3,11 +3,12 @@
     # features every host gets
     imports = with config.flake.modules.homeManager; [
       agent-skills
-      apps-own
+      own-apps
       bookmarks
       claude
       cli-tools
       copilot
+      desktop-apps
       dlang
       editor
       fish
@@ -15,6 +16,7 @@
       ghostty
       global-cargo-settings
       herdr
+      proton-pass
       secrets
     ];
 

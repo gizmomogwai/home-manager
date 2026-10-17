@@ -6,9 +6,7 @@
       byobu
       devenv
       inputs.donies.packages.${stdenv.hostPlatform.system}.default
-      # dropbox
       fd
-      firefox
       ffmpeg
       fzf
       gdu
@@ -16,7 +14,6 @@
       git
       git-lfs
       git-repo
-      google-chrome
       htop
       httpie
       jq
@@ -27,19 +24,14 @@
       lua
       nix-tree
       pandoc
-      proton-cli
-      proton-pass
       rclone
       ripgrep
       rsync
       rtk
-      slack
-      spotify
       inputs.spotify-dl.packages.${stdenv.hostPlatform.system}.default
       tealdeer
       tig
       tree
-      zeal
     ];
   };
 }

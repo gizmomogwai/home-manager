@@ -8,6 +8,12 @@ release-check policy, session path, and Home Manager enablement for all hosts.
 =modules/lib/home.nix= handles home construction and overlay composition.
 The former =base= module is no longer exported; consumers should select =common=.
 
+* Application inventories
+=modules/cli-tools.nix= owns terminal tools; =modules/desktop-apps.nix= owns
+graphical applications. =common= selects both, preserving desktop apps on all hosts.
+=modules/proton-pass.nix= owns the password-manager experience: =proton-cli= and
+the =proton-pass= desktop app, selected together by =common=.
+
 * Fish shell
 =modules/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
 Starship and direnv integrations. Select =fish= without a separate =prompt= module.
