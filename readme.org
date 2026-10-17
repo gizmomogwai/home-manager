@@ -16,6 +16,12 @@ Agent-specific settings and instructions stay in their respective agent modules.
 When composing a profile without =common=, select =agent-skills= alongside any
 agent module. New agents need only their own target declaration, not a skill list.
 
+* Feature-owned overlays
+=modules/editor.nix= contributes the Emacs overlay; =modules/herdr.nix= contributes
+the Rust overlay; =modules/nixgl.nix= contributes nixGL. =modules/lib/home.nix=
+only declares and consumes the shared =overlays= option. Contributions still apply
+globally to every home configuration, regardless of Home Manager feature selection.
+
 * herdr Copilot detection patch
 =patches/herdr-copilot-detection.patch= fixes detection of Nix-packaged Copilot
 running as =node= or =MainThread=. Applied by =modules/herdr.nix=; includes

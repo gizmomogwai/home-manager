@@ -1,4 +1,6 @@
-{
+{inputs, ...}: {
+  overlays = [inputs.emacs-overlay.overlays.default];
+
   flake.modules.homeManager.editor = {pkgs, ...}: {
     home.packages = with pkgs; [
       (writeShellScriptBin "magit" ''

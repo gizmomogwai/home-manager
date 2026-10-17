@@ -42,6 +42,5 @@
       tree
       zeal
     ];
-    home.sessionVariables.CARGO_TARGET_DIR = "/tmp/cargo-target";
   };
 }

@@ -56,7 +56,7 @@ Preserve: every active declaration. Keep warnings about read-only Nix-managed
 settings with any retained examples, plus explanations of skill source and
 relative link-path requirements.
 
-* TODO Contribute overlays from their owning feature modules
+* DONE Contribute overlays from their owning feature modules
 :PROPERTIES:
 :STRENGTH: Strong
 :END:

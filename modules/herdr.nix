@@ -1,4 +1,6 @@
 {inputs, ...}: {
+  overlays = [(import inputs.rust-overlay)];
+
   flake.modules.homeManager.herdr = {
     pkgs,
     lib,

@@ -18,8 +18,6 @@
   };
 
   config = {
-    overlays = [(import inputs.rust-overlay) inputs.emacs-overlay.overlays.default];
-
     mkHome = {
       system,
       user,
