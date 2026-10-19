@@ -5,6 +5,7 @@
       "donies"
       "sesame"
       "spotify-dl"
+      "viewed"
       "worker"
     ];
   };

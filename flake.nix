@@ -74,6 +74,10 @@
       url = "git+ssh://git@github.com/gizmomogwai/spotify-dl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    viewed = {
+      url = "git+ssh://git@github.com/gizmomogwai/sg4d";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     worker = {
       url = "github:gizmomogwai/repo-worker";
       inputs.nixpkgs.follows = "nixpkgs";

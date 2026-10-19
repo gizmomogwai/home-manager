@@ -56,6 +56,22 @@
         "type": "github"
       }
     },
+    "dimgui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701203763,
+        "narHash": "sha256-aetN1+RuwvCj/q9n/LUB0llidqVsgvEoqjXD/hG0AMI=",
+        "owner": "gizmomogwai",
+        "repo": "dimgui",
+        "rev": "a50fbc9a4080ea6242e692ae7ced52f89d043ad3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "dimgui",
+        "type": "github"
+      }
+    },
     "donies": {
       "inputs": {
         "nixpkgs": [
@@ -322,6 +338,7 @@
         "sesame": "sesame",
         "socratic-code-mentor": "socratic-code-mentor",
         "spotify-dl": "spotify-dl",
+        "viewed": "viewed",
         "worker": "worker"
       }
     },
@@ -452,6 +469,27 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
+      }
+    },
+    "viewed": {
+      "inputs": {
+        "dimgui": "dimgui",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792412534,
+        "narHash": "sha256-Z6veYD4nuPWLmmCQJTvxwTHrxOst0bIVxEHqClpJ+eI=",
+        "ref": "refs/heads/main",
+        "rev": "490c822823f7ef7ce65a03be9b045ad4c53d7663",
+        "revCount": 143,
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/sg4d"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/sg4d"
       }
     },
     "worker": {
