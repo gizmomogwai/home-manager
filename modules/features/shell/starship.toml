@@ -21,7 +21,7 @@ $python$rust$ruby$typst\
 [](fg:lang_bg bg:direnv_bg)\
 ${custom.direnv_loaded}${custom.direnv_unloaded}${custom.direnv_blocked}\
 [](fg:direnv_bg)\
-$line_break$character"""
+$line_break$status$character"""
 add_newline = true
 
 palette = 'zenburn'
@@ -42,6 +42,11 @@ style = "fg:bg bg:vc_bg"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+
+[status]
+disabled = false
+style = "fg:red"
+format = "[$status]($style) "
 
 [custom.jj]
 when = "jj-starship detect"

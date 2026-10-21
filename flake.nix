@@ -58,6 +58,10 @@
       url = "github:TheTeXnician/nixGL/bbcc73c8bcc72b195fead993c7056b12683424f0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    matt-pocock = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
     ponytail = {
       url = "github:DietrichGebert/ponytail";
       flake = false;
