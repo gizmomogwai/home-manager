@@ -8,7 +8,6 @@
       rofi
       rofi-calc
       taglib
-      vicinae
       vlc
     ];
     home.sessionVariables = {

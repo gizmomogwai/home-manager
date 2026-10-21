@@ -16,6 +16,10 @@
       url = "github:gizmomogwai/dime";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ck-skills = {
+      url = "github:gizmomogwai/ck-skills";
+      flake = false;
+    };
     donies = {
       url = "github:gizmomogwai/donies";
       inputs.nixpkgs.follows = "nixpkgs";

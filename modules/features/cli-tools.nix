@@ -22,6 +22,7 @@
       lazyjj
       lua
       nix-tree
+      nvd
       pandoc
       rclone
       ripgrep

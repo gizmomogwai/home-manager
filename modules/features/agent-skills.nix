@@ -19,9 +19,14 @@
         };
         # gist: SKILL.md at repo root
         socratic-code-mentor = {path = inputs.socratic-code-mentor;};
+        ck-skills = {
+          path = inputs.ck-skills;
+          subdir = "skills";
+          filter.maxDepth = 1;
+        };
       };
 
-      skills.enableAll = ["ponytail" "caveman"];
+      skills.enableAll = ["ponytail" "caveman" "ck-skills"];
       skills.explicit.socratic-code-mentor = {
         from = "socratic-code-mentor";
         path = ".";

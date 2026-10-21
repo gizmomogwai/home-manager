@@ -1,10 +1,11 @@
 {
   flake.modules.homeManager.desktop-apps = {pkgs, ...}: {
     home.packages = with pkgs; [
-      bambu-studio
+#      bambu-studio
       firefox
       google-chrome
       openscad
+      meld
       slack
       spotify
       zeal
