@@ -1,7 +1,8 @@
 {
   flake.modules.homeManager.linux = {pkgs, ...}: {
     home.packages = with pkgs; [
-      dive
+#      bambu-studio
+#      dive
       evince
       gimp
       rmpc
