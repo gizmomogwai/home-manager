@@ -67,7 +67,12 @@
     };
 
     flake.modules.homeManager.nixgl-intel = {pkgs, ...}: {
-      home.packages = [pkgs.nixgl.nixGLIntel];
+      home.packages = [
+        pkgs.nixgl.nixGLIntel
+        pkgs.nixgl.nixVulkanIntel
+       ];
+      targets.genericLinux.nixGL.packages = pkgs.nixgl;
+      targets.genericLinux.nixGL.defaultWrapper = "mesa";
     };
   };
 }
