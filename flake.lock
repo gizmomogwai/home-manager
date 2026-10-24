@@ -462,11 +462,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1792037897,
-        "narHash": "sha256-8BbyDl6lfjeJDm0fpxvez+nQwiLSyxAJGTQeMUvE+BE=",
+        "lastModified": 1792862238,
+        "narHash": "sha256-fOgOJ5iDMQLSdmPi+Ih4eP3JA5cSkyoeQmvQEvx3wOw=",
         "ref": "refs/heads/main",
-        "rev": "8e561f139d0ac36a4809394eebf8e8f41c51ada4",
-        "revCount": 30,
+        "rev": "7854d7be379c7a76a5a5f9eab7b97983304dbcbf",
+        "revCount": 33,
         "type": "git",
         "url": "ssh://git@github.com/gizmomogwai/spotify-dl"
       },
