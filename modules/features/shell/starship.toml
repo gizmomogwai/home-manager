@@ -106,3 +106,8 @@ format = "[.$output]($style)"
 [buf]
 format = "|[$symbol($version)]($style)"
 symbol = "🐃"
+
+[typst]
+style = "fg:bg bg:lang_bg"
+format = "[$symbol($version)]($style)"
+symbol = "📜"
