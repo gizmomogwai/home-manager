@@ -6,6 +6,7 @@
       openscad
       meld
       slack
+      speedcrunch
       spotify
       zeal
     ];
