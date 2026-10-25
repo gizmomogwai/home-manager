@@ -17,7 +17,7 @@ format = """
 $directory\
 ${custom.jj}\
 [](fg:vc_bg bg:lang_bg)\
-$python$rust$ruby$typst\
+$python$rust$ruby$typst${custom.flake}\
 [](fg:lang_bg bg:direnv_bg)\
 ${custom.direnv_loaded}${custom.direnv_unloaded}${custom.direnv_blocked}\
 [](fg:direnv_bg)\
@@ -111,3 +111,9 @@ symbol = "🐃"
 style = "fg:bg bg:lang_bg"
 format = "[$symbol($version)]($style)"
 symbol = "📜"
+
+[custom.flake]
+detect_files = ["flake.nix"]
+symbol = "❄️"
+style = "fg:bg bg:lang_bg"
+format = "[$symbol]($style)"
