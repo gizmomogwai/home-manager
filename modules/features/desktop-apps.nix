@@ -1,14 +1,24 @@
 {
-  flake.modules.homeManager.desktop-apps = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      firefox
+  flake.modules.homeManager.desktop-apps = {
+    config,
+    pkgs,
+    ...
+  }: let
+    openGLApps = with pkgs; [
       google-chrome
-      openscad
-      meld
       slack
-      speedcrunch
-      spotify
-      zeal
     ];
+  in {
+    home.packages =
+      map config.lib.nixGL.wrap openGLApps
+      ++ (with pkgs; [
+        firefox
+        obsidian
+        openscad
+        meld
+        speedcrunch
+        spotify
+        zeal
+      ]);
   };
 }
