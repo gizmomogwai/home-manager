@@ -18,6 +18,7 @@
         meld
         speedcrunch
         spotify
+        vscode
         zeal
       ]);
   };
