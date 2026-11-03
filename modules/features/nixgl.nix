@@ -25,7 +25,8 @@
             name = "nixGL-patched";
             src = inputs.nixgl;
             # upstream sets GBM_BACKENDS_PATH only for mesa; webkitgtk then loads mesa's dri_gbm.so
-            patches = [../../nixgl-nvidia-gbm.patch];
+            # nixpkgs removed pcre (2026-10-25); nixGL's checkPhase still used pcregrep
+            patches = [../../nixgl-nvidia-gbm.patch ../../nixgl-pcre2.patch];
           }) {
             pkgs = final;
             inherit (config) nvidiaVersion nvidiaHash;
@@ -70,7 +71,7 @@
       home.packages = [
         pkgs.nixgl.nixGLIntel
         pkgs.nixgl.nixVulkanIntel
-       ];
+      ];
       targets.genericLinux.nixGL.packages = pkgs.nixgl;
       targets.genericLinux.nixGL.defaultWrapper = "mesa";
     };

@@ -5,6 +5,7 @@
       babelfish
       byobu
       devenv
+      ditaa
       fastfetch
       fd
       ffmpeg

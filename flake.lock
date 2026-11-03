@@ -95,11 +95,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792237804,
-        "narHash": "sha256-lDZcEtrbhGVsdyAGUYhLCRx91i+x5kRnMX8GTWgBmEQ=",
+        "lastModified": 1793697849,
+        "narHash": "sha256-bCziIuKsiJufkYgiVUVMALcmeLMbWCiKz+RcuYjNIsE=",
         "owner": "gizmomogwai",
         "repo": "donies",
-        "rev": "9fb7809611e8013c6b21fdce2770b00d39b4743a",
+        "rev": "8cf24a7955d9312ff4614737cde4618b83e9fcf0",
         "type": "github"
       },
       "original": {
