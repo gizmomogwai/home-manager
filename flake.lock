@@ -154,11 +154,11 @@
     "fisher-package": {
       "flake": false,
       "locked": {
-        "lastModified": 1789154237,
-        "narHash": "sha256-K/9aLeENYfYSU2DKPY6zKK843bDV7+0QV7geBQ7+5O8=",
+        "lastModified": 1793817651,
+        "narHash": "sha256-QMn+7ckzwm1i1ksQXUP0/r4wJMRzagHszFS+mCJpNig=",
         "owner": "gizmomogwai",
         "repo": "fisher-package",
-        "rev": "e9ba5a044aa5a54469709b19e1b5d57ba7df1681",
+        "rev": "f12ab14a445b6cbabac71a97ba8ae6e35b3109cc",
         "type": "github"
       },
       "original": {
