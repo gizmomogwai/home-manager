@@ -13,10 +13,8 @@
     home.packages =
       map config.lib.nixGL.wrap openGLApps
       ++ (with pkgs; [
-        obsidian
         openscad
         meld
-        speedcrunch
         spotify
         vscode
         zeal
