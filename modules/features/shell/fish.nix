@@ -1,6 +1,12 @@
 {inputs, ...}: {
   flake.modules.homeManager.fish = {pkgs, ...}: {
-    home.packages = [pkgs.moor];
+    home.packages = [
+      pkgs.moor
+      (pkgs.writeScriptBin "projects.rb" ''
+        #!${pkgs.ruby}/bin/ruby
+        load "${./projects.rb}"
+      '')
+    ];
 
     programs.direnv = {
       enable = true;
