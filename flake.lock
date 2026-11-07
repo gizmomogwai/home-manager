@@ -39,11 +39,11 @@
     "ck-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1794050420,
-        "narHash": "sha256-30zTpz+tIgGy8Ph2sFKkiUnPQJESyO+o3Hv/R8BO1Vs=",
+        "lastModified": 1794226951,
+        "narHash": "sha256-Yv5f77AEHmSujcxE3z24Gv5eTb3nXoPJsh7DaBeI1ts=",
         "owner": "gizmomogwai",
         "repo": "ck-skills",
-        "rev": "2b476d64ca1261c7bb442645de23bdea3d82b1a4",
+        "rev": "f1f8927838e32581be4c09d43809811c5aec0a26",
         "type": "github"
       },
       "original": {
