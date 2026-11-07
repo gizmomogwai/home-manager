@@ -23,11 +23,11 @@
     "caveman": {
       "flake": false,
       "locked": {
-        "lastModified": 1792915057,
-        "narHash": "sha256-fuSsPP7GMuAZ5Ab2paS41RAo5k/objd503ElcMeMgsk=",
+        "lastModified": 1794022026,
+        "narHash": "sha256-V3+UtzgdtNyVDHck+DGflVpb0G9ljwU7TNUoLOVQDsY=",
         "owner": "JuliusBrussee",
         "repo": "caveman",
-        "rev": "9b68f7ed12b05e7efaff18e65c5a3fc2849fd0a4",
+        "rev": "c310c9d300df13a1dd9f5c086120ffd857a164a1",
         "type": "github"
       },
       "original": {
@@ -39,11 +39,11 @@
     "ck-skills": {
       "flake": false,
       "locked": {
-        "lastModified": 1792788283,
-        "narHash": "sha256-Tqpd0yghAUrQ92U+qXHwz1xPDeEy8Fv2JyUX2HFh31Y=",
+        "lastModified": 1794050420,
+        "narHash": "sha256-30zTpz+tIgGy8Ph2sFKkiUnPQJESyO+o3Hv/R8BO1Vs=",
         "owner": "gizmomogwai",
         "repo": "ck-skills",
-        "rev": "3f81f239a4c9c1d45bbbf72cbc99e3d9fefbf0d6",
+        "rev": "2b476d64ca1261c7bb442645de23bdea3d82b1a4",
         "type": "github"
       },
       "original": {

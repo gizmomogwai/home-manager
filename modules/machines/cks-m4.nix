@@ -3,6 +3,13 @@
     system = "aarch64-darwin";
     user = "gizmo";
     homeDirectory = "/Users/gizmo";
-    modules = with config.flake.modules.homeManager; [common darwin];
+    modules = with config.flake.modules.homeManager; [
+      common
+      darwin
+      ({pkgs, ...}: {
+        home.packages = [
+        ];
+      })
+    ];
   };
 }
