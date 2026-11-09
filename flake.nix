@@ -41,6 +41,10 @@
       url = "github:gizmomogwai/fisher-package";
       flake = false;
     };
+    fuzzed-gui = {
+      url = "git+ssh://git@github.com/gizmomogwai/fuzzed-gui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # own input instead of pkgs.herdr: update separately with `nix flake update herdr`
     herdr = {
       url = "github:herdrdev/herdr";

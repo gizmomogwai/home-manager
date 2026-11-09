@@ -1,12 +1,23 @@
 {inputs, ...}: {
-  flake.modules.homeManager.own-apps = {pkgs, ...}: {
-    home.packages = map (app: inputs.${app}.packages.${pkgs.stdenv.hostPlatform.system}.default) [
-      "dime"
-      "donies"
-      "sesame"
-      "spotify-dl"
+  flake.modules.homeManager.own-apps = {
+    config,
+    pkgs,
+    ...
+  }: let
+    app = name: inputs.${name}.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    openGLApps = [
+      "fuzzed-gui"
       "viewed"
-      "worker"
     ];
+  in {
+    home.packages =
+      map (name: config.lib.nixGL.wrap (app name)) openGLApps
+      ++ map app [
+        "dime"
+        "donies"
+        "sesame"
+        "spotify-dl"
+        "worker"
+      ];
   };
 }
