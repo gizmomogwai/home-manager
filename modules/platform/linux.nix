@@ -1,5 +1,9 @@
 {
-  flake.modules.homeManager.linux = {pkgs, ...}: {
+  flake.modules.homeManager.linux = {
+    config,
+    pkgs,
+    ...
+  }: {
     home.packages = with pkgs; [
       #      bambu-studio
       #      dive
@@ -16,7 +20,8 @@
     };
     services.picom = {
       enable = true;
-      package = pkgs.picom-pijulius;
+      package = config.lib.nixGL.wrap pkgs.picom-pijulius;
+      backend = "glx";
       shadow = true;
       settings.corner-radius = 10;
     };

@@ -1,5 +1,6 @@
 {
   flake.modules.homeManager.fonts = {
+    config,
     pkgs,
     lib,
     ...
@@ -29,10 +30,14 @@
     };
   in {
     home.packages = with pkgs; [
+      inter
       iosevka-bin
       nerd-fonts.iosevka-term
       nordwand-mono
     ];
     fonts.fontconfig.enable = true;
+    # Font of the picker GUI (clay-selector reads ~/.config/picker/font.ttf).
+    xdg.configFile."picker/font.ttf".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.profileDirectory}/share/fonts/truetype/InterVariable.ttf";
   };
 }
