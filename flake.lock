@@ -255,10 +255,32 @@
         "type": "github"
       }
     },
+    "fuzzed-clay": {
+      "inputs": {
+        "fuzzed": "fuzzed",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794337062,
+        "narHash": "sha256-FviAL3fHvwVFwthk/skvKITh4/Iftb0DywVEFN6KQ8s=",
+        "ref": "refs/heads/main",
+        "rev": "fdaa8c4cf6afbbaa2b3d773d7f21b8d8ef3017dc",
+        "revCount": 5,
+        "submodules": true,
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/fuzzed-clay"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/gizmomogwai/fuzzed-clay"
+      }
+    },
     "fuzzed-gui": {
       "inputs": {
         "dimgui": "dimgui",
-        "fuzzed": "fuzzed",
+        "fuzzed": "fuzzed_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -275,6 +297,22 @@
       "original": {
         "type": "git",
         "url": "ssh://git@github.com/gizmomogwai/fuzzed-gui"
+      }
+    },
+    "fuzzed_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794168357,
+        "narHash": "sha256-5gvNe7Nut3ncwBef846WDh9ZbG0c/SOTvTDfqxZYydY=",
+        "owner": "gizmomogwai",
+        "repo": "fuzzed",
+        "rev": "8df944e70a33e4f24edcf756ddebc697dfaae150",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "repo": "fuzzed",
+        "type": "github"
       }
     },
     "herdr": {
@@ -415,6 +453,7 @@
         "extract-bookmarks-d": "extract-bookmarks-d",
         "fisher-package": "fisher-package",
         "flake-parts": "flake-parts",
+        "fuzzed-clay": "fuzzed-clay",
         "fuzzed-gui": "fuzzed-gui",
         "herdr": "herdr",
         "home-manager": "home-manager",

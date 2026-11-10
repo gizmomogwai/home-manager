@@ -41,6 +41,10 @@
       url = "github:gizmomogwai/fisher-package";
       flake = false;
     };
+    fuzzed-clay = {
+      url = "git+ssh://git@github.com/gizmomogwai/fuzzed-clay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     fuzzed-gui = {
       url = "git+ssh://git@github.com/gizmomogwai/fuzzed-gui";
       inputs.nixpkgs.follows = "nixpkgs";
