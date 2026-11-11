@@ -5,7 +5,8 @@
 #  [vc status]───[language]───[direnv]
 #  └ character
 #
-# vc status : $directory + ${custom.jj}
+# vc status : ${custom.jj}
+# directory : $directory (right aligned via $fill, full path up to ~)
 # language  : $python $rust $ruby $nix_shell $typst
 # direnv    : ${custom.direnv_loaded|unloaded|blocked}
 # statuscode: $character (second line)
@@ -14,13 +15,14 @@
 #[](fg:direnv_bg)\
 format = """
 (fg:vc_bg)\
-$directory\
 ${custom.jj}\
 [](fg:vc_bg bg:lang_bg)\
 $python$rust$ruby$typst${custom.flake}\
 [](fg:lang_bg bg:direnv_bg)\
 ${custom.direnv_loaded}${custom.direnv_unloaded}${custom.direnv_blocked}\
 [](fg:direnv_bg)\
+$fill\
+[](fg:vc_bg)$directory\
 $line_break$status$character"""
 add_newline = true
 
@@ -40,8 +42,11 @@ yellow    = '#f0dfaf'  # zenburn yellow / ANSI yellow
 [directory]
 style = "fg:bg bg:vc_bg"
 format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+truncation_length = 0
+truncate_to_repo = false
+
+[fill]
+symbol = " "
 
 [status]
 disabled = false
