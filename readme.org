@@ -43,6 +43,51 @@ the =proton-pass= desktop app, selected together by =common=.
 =modules/features/own-apps.nix= selects the default input-backed packages for dime, donies,
 sesame, spotify-dl, and worker.
 
+* Linux voice typing
+The =whisper= feature installs the local model and =voice-type=. Key injection
+uses =xdotool= through the current X11 session; no input daemon, udev rule or
+=/dev/uinput= permission is required.
+
+Run =voice-type= in Ghostty to record from the default PipeWire microphone.
+While recording, it transcribes all audio so far about every two seconds and
+types the result into the focused window. When the recognizer changes earlier
+words, it deletes its own text back to the first difference with Backspace and
+types the new ending. While recording, punctuation and capitals are left as
+first typed; the last pass corrects them, which can retype most of the text.
+After sound above the threshold starts, near-silence stops
+recording; a last pass over the full audio applies the final correction. Tune
+=SILENCE_STOP_DURATION_SECONDS= in the public section of
+=modules/features/whisper/config.py=, imported by both the Python implementation
+and its tests. Private protocol constants live in a separate section of that
+module. Press Enter to stop sooner, or Ctrl+C
+to cancel.
+
+Do not type, move the cursor or press Enter while dictating: Backspace would
+delete the wrong characters. Dictation stops when another window gets focus.
+The command removes control characters and never sends Enter. Temporary audio
+and transcripts are removed when it exits.
+
+The English model can misrecognize words; review inserted text before submitting.
+Silence detection defaults to 0.5% signal amplitude, which fits normal speech
+in a quiet room. =VOICE_SILENCE_THRESHOLD= sets the threshold (for example,
+=3%= with background music). Quiet music
+below this level does not reset the timer; louder music does. A high threshold
+can miss quiet speech. This detects sound levels, not speech versus music.
+Text is typed as X11 key presses through =xdotool=; the clipboard is not
+touched. Typing on the German layout is not verified yet.
+Desktop shortcut wiring is separate. Script checks run during the package build
+and import the shared config module, including the tuned silence duration; they can
+also run directly:
+
+#+begin_src sh
+python3 /home/christian-koestlin/.config/home-manager/modules/features/whisper/test-voice-type.py
+#+end_src
+
+The Awesome configuration binds Super+S to start and stop recording
+without opening a terminal. It runs =voice-type --hotkey= and sends =SIGUSR1=
+to stop recording. Status notifications distinguish recording and transcription;
+repeated presses during transcription do not start another recording.
+
 * Fish shell
 =modules/features/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
 Starship and direnv integrations. Select =fish= without a separate =prompt= module.
@@ -51,6 +96,56 @@ Secret loading remains in =modules/features/secrets.nix=.
 Edit =modules/features/shell/starship.toml= for the prompt configuration; Home Manager links
 it to =~/.config/starship.toml= as a read-only file. Back up an existing unmanaged
 file on the first switch with =home-manager switch --flake . -b backup=.
+
+* Linux development CPU priority
+The global Cargo feature defines one systemd user =devbuild.slice= with
+=CPUWeight=10=, compared with the usual sibling weight of 100. Concurrent
+development sessions share this allocation. There is no hard CPU quota: builds
+use idle CPU but yield a larger share to competing foreground work.
+Darwin and the existing =CARGO_TARGET_DIR=/tmp/cargo-target= setting are unchanged.
+
+Fish automatically runs =devenv= commands and ordinary =nix develop ...=
+invocations through =dev-build=. The complete session and its descendants
+inherit lower CPU priority, including whichever Cargo its toolchain selects.
+Non-build commands inside that session also get lower priority. No project
+devenv or flake changes are needed.
+
+Scripts, agents, IDEs, absolute executable paths, =command nix=, and Nix options
+before =develop= bypass these Fish functions. Use the helper explicitly at their
+entry point:
+
+#+begin_src sh
+dev-build nix develop --command cargo build
+dev-build devenv shell
+#+end_src
+
+Command proxies such as RTK also bypass Fish functions; use
+=rtk proxy dev-build nix develop ...= instead of =rtk proxy nix develop ...=.
+
+Direnv activation alone does not move the terminal into a cgroup. For Cargo
+launched from an unscoped direnv-enabled terminal, use =dev-build cargo build=.
+Nested helper calls reuse their existing build scope.
+
+The host needs a running systemd user manager with the cgroup v2 CPU controller
+delegated. Missing support is an error, not an unrestricted fallback. Inspect:
+
+#+begin_src sh
+systemctl --user show devbuild.slice --property=CPUWeight --property=ControlGroup
+systemd-cgls --user-unit=devbuild.slice
+#+end_src
+
+Existing builds are not moved; restart through a scoped entry point.
+Nix daemon workers and independently launched systemd services do not inherit
+the client's scope. CPU weighting is not guaranteed latency protection, and
+does not limit memory pressure, disk contention, or thermal throttling.
+Removing the Linux additions and reactivating Home Manager restores normal
+entry points; already-running scopes keep their policy until exit.
+
+Wrapper checks run during its package build, or directly:
+
+#+begin_src sh
+python3 /home/christian-koestlin/.config/home-manager/modules/features/global-cargo-settings/test-dev-build.py
+#+end_src
 
 * Shared agent skills
 =modules/features/agent-skills.nix= owns skill sources, selection, the upstream Home Manager

@@ -3,6 +3,6 @@
     system = "x86_64-linux";
     user = "christian-koestlin";
     homeDirectory = "/home/christian-koestlin";
-    modules = with config.flake.modules.homeManager; [common linux nixgl-nvidia];
+    modules = with config.flake.modules.homeManager; [common linux nixgl-nvidia whisper];
   };
 }
