@@ -98,6 +98,14 @@
       url = "github:gizmomogwai/repo-worker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zellij = {
+      url = "github:zellij-org/zellij";
+      flake = false;
+    };
+    diskonaut = {
+      url = "github:neunenak/diskonaut";
+      flake = false;
+    };
   };
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }

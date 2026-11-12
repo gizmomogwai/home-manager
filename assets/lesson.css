@@ -1,0 +1,20 @@
+:root {
+  color-scheme: light;
+  font: 16px/1.6 system-ui, sans-serif;
+  color: #17202a;
+  background: #f5f3ee;
+}
+
+body {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+h1, h2 { line-height: 1.2; }
+code, pre { background: #e8e5de; border-radius: .35rem; }
+code { padding: .1rem .3rem; }
+pre { padding: 1rem; overflow-x: auto; }
+.rule { border-left: .25rem solid #806b4e; padding-left: 1rem; }
+.exercise { background: #fff; padding: 1rem 1.25rem; border-radius: .5rem; }
+a { color: #634b2f; }

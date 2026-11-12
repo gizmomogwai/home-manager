@@ -104,6 +104,22 @@
         "type": "github"
       }
     },
+    "diskonaut": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765108340,
+        "narHash": "sha256-ZH0ERiyvxkO/kxDryek513wDlViE8zOp/WtvSECz8lo=",
+        "owner": "neunenak",
+        "repo": "diskonaut",
+        "rev": "67ab9c7baa8d6584384c5eec22751f5bac53e9a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neunenak",
+        "repo": "diskonaut",
+        "type": "github"
+      }
+    },
     "donies": {
       "inputs": {
         "nixpkgs": [
@@ -448,6 +464,7 @@
         "caveman": "caveman",
         "ck-skills": "ck-skills",
         "dime": "dime",
+        "diskonaut": "diskonaut",
         "donies": "donies",
         "emacs-overlay": "emacs-overlay",
         "extract-bookmarks-d": "extract-bookmarks-d",
@@ -467,7 +484,8 @@
         "socratic-code-mentor": "socratic-code-mentor",
         "spotify-dl": "spotify-dl",
         "viewed": "viewed",
-        "worker": "worker"
+        "worker": "worker",
+        "zellij": "zellij"
       }
     },
     "rust-overlay": {
@@ -637,6 +655,22 @@
       "original": {
         "owner": "gizmomogwai",
         "repo": "repo-worker",
+        "type": "github"
+      }
+    },
+    "zellij": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794385533,
+        "narHash": "sha256-JpSNWC6jHahirUmnWRZKiVRonFjjIZx9j0V//6t1+iM=",
+        "owner": "zellij-org",
+        "repo": "zellij",
+        "rev": "aedee21cb0d58d716496e7f6c66ba0b6f08045d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zellij-org",
+        "repo": "zellij",
         "type": "github"
       }
     }
