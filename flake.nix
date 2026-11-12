@@ -98,10 +98,6 @@
       url = "github:gizmomogwai/repo-worker";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zellij = {
-      url = "github:zellij-org/zellij";
-      flake = false;
-    };
     diskonaut = {
       url = "github:neunenak/diskonaut";
       flake = false;

@@ -484,8 +484,7 @@
         "socratic-code-mentor": "socratic-code-mentor",
         "spotify-dl": "spotify-dl",
         "viewed": "viewed",
-        "worker": "worker",
-        "zellij": "zellij"
+        "worker": "worker"
       }
     },
     "rust-overlay": {
@@ -655,22 +654,6 @@
       "original": {
         "owner": "gizmomogwai",
         "repo": "repo-worker",
-        "type": "github"
-      }
-    },
-    "zellij": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1794385533,
-        "narHash": "sha256-JpSNWC6jHahirUmnWRZKiVRonFjjIZx9j0V//6t1+iM=",
-        "owner": "zellij-org",
-        "repo": "zellij",
-        "rev": "aedee21cb0d58d716496e7f6c66ba0b6f08045d8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zellij-org",
-        "repo": "zellij",
         "type": "github"
       }
     }

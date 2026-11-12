@@ -88,11 +88,6 @@ without opening a terminal. It runs =voice-type --hotkey= and sends =SIGUSR1=
 to stop recording. Status notifications distinguish recording and transcription;
 repeated presses during transcription do not start another recording.
 
-* Zellij
-Shared CLI tools install Zellij from GitHub source. On Linux, its package
-wrapper exposes X11/Wayland and fontconfig libraries for =zellij terminal=
-and uses the machine's nixGL wrapper for graphics drivers.
-
 * Fish shell
 =modules/features/shell/fish.nix= owns Fish, its plugins, aliases, initialization, and
 Starship and direnv integrations. Select =fish= without a separate =prompt= module.
