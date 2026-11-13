@@ -300,11 +300,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794337062,
-        "narHash": "sha256-FviAL3fHvwVFwthk/skvKITh4/Iftb0DywVEFN6KQ8s=",
+        "lastModified": 1794341067,
+        "narHash": "sha256-+3CBekDO15I0vlr8qgURDD73XUAJh7PjioPU8uGYBg8=",
         "ref": "refs/heads/main",
-        "rev": "fdaa8c4cf6afbbaa2b3d773d7f21b8d8ef3017dc",
-        "revCount": 5,
+        "rev": "8066c34a8502ab72b5fa8e09ae9d174092d12226",
+        "revCount": 6,
         "submodules": true,
         "type": "git",
         "url": "ssh://git@github.com/gizmomogwai/fuzzed-clay"

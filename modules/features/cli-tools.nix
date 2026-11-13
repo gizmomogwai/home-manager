@@ -44,6 +44,7 @@
       nix-tree
       nvd
       pandoc
+      poppler-utils
       rclone
       ripgrep
       rsync
