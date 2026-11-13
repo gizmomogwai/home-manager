@@ -12,6 +12,11 @@
       url = "github:JuliusBrussee/caveman";
       flake = false;
     };
+    # branch nix-flake: master of the fork mirrors upstream, which has no flake
+    chipmunk = {
+      url = "github:gizmomogwai/chipmunk/nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dime = {
       url = "github:gizmomogwai/dime";
       inputs.nixpkgs.follows = "nixpkgs";

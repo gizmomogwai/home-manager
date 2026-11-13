@@ -36,6 +36,27 @@
         "type": "github"
       }
     },
+    "chipmunk": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794575877,
+        "narHash": "sha256-UN0d0CbZTIsflByxSNcMmPDBgQl3WWl2VkXOSFDxZv4=",
+        "owner": "gizmomogwai",
+        "repo": "chipmunk",
+        "rev": "62d81723a08224523e6b1e55037bd8745463d2c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gizmomogwai",
+        "ref": "nix-flake",
+        "repo": "chipmunk",
+        "type": "github"
+      }
+    },
     "ck-skills": {
       "flake": false,
       "locked": {
@@ -462,6 +483,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "caveman": "caveman",
+        "chipmunk": "chipmunk",
         "ck-skills": "ck-skills",
         "dime": "dime",
         "diskonaut": "diskonaut",

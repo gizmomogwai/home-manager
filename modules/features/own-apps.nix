@@ -6,6 +6,7 @@
   }: let
     app = name: inputs.${name}.packages.${pkgs.stdenv.hostPlatform.system}.default;
     openGLApps = [
+      "chipmunk"
       "fuzzed-clay"
       "fuzzed-gui"
       "viewed"
