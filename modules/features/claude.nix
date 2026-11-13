@@ -12,7 +12,7 @@
       pkgs.alsa-utils
     ];
 
-    home.file.".claude/CLAUDE.md".source = ./claude/CLAUDE.md;
+    home.file.".claude/CLAUDE.md".source = ./agents/instructions.md;
 
     programs.agent-skills.targets.claude = {
       enable = true;
