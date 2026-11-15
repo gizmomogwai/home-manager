@@ -279,11 +279,11 @@
     "fuzzed": {
       "flake": false,
       "locked": {
-        "lastModified": 1794168357,
-        "narHash": "sha256-5gvNe7Nut3ncwBef846WDh9ZbG0c/SOTvTDfqxZYydY=",
+        "lastModified": 1794689936,
+        "narHash": "sha256-Z3FAYKDNQ/w7guOhimh7IZftK3Zf42oGuT5O/G7fQOE=",
         "owner": "gizmomogwai",
         "repo": "fuzzed",
-        "rev": "8df944e70a33e4f24edcf756ddebc697dfaae150",
+        "rev": "ae417e752a898b44a711c893d10361c740d45690",
         "type": "github"
       },
       "original": {
@@ -300,11 +300,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794341067,
-        "narHash": "sha256-+3CBekDO15I0vlr8qgURDD73XUAJh7PjioPU8uGYBg8=",
+        "lastModified": 1794778562,
+        "narHash": "sha256-7sj9LniZOZmPS7qh9Dr13paoSUNV07ZLgUSmHF1aoGc=",
         "ref": "refs/heads/main",
-        "rev": "8066c34a8502ab72b5fa8e09ae9d174092d12226",
-        "revCount": 6,
+        "rev": "82bbb2bd31b122ee2e7bf2094fcc7b76fcd05e74",
+        "revCount": 8,
         "submodules": true,
         "type": "git",
         "url": "ssh://git@github.com/gizmomogwai/fuzzed-clay"
