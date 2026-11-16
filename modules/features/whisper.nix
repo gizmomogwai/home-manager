@@ -1,8 +1,5 @@
 {
-  flake.modules.homeManager.whisper = {
-    pkgs,
-    ...
-  }: let
+  flake.modules.homeManager.whisper = {pkgs, ...}: let
     model = pkgs.fetchurl {
       url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.en.bin";
       hash = "sha256-xhONbVjsyDIgl+D5h8MvG+i7ChhTKj+I9zTRu/nEHl0=";
