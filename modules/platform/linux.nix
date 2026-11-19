@@ -23,7 +23,27 @@
       package = config.lib.nixGL.wrap pkgs.picom-pijulius;
       backend = "glx";
       shadow = true;
-      settings.corner-radius = 10;
+      settings = {
+        corner-radius = 10;
+        wintypes = {
+          menu = {
+            shadow = false;
+            blur-background = false;
+          };
+          dropdown_menu = {
+            shadow = false;
+            blur-background = false;
+          };
+          popup_menu = {
+            shadow = false;
+            blur-background = false;
+          };
+          utility = {
+            shadow = false;
+            blur-background = false;
+          };
+        };
+      };
     };
     # non-NixOS: puts ~/.nix-profile/share into XDG_DATA_DIRS so rofi drun sees home-manager .desktop files
     targets.genericLinux.enable = true;
